@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import Header from "./Header";
 import Search from "./Search";
+import BookCard from "./BookCard";
 //import Splash from "./Splash";
 //import PortfolioCards from "./PortfolioCards";
 //import "./App.css";
@@ -40,6 +41,7 @@ function App() {
           <div className="container">
             <Header />
             <Search />
+            <BookCard />
             {/* {(page === "landing") && <Splash pageUpdater={setPage} />}
             {(page === "portfolio") && <PortfolioCards pageUpdater={setPage} portfolioData={portfolioData} />} */}
             {/* /*{(page > 0 && page != 8) && <Navbar pageUpdater={setPage} />}
