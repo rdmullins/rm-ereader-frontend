@@ -12,10 +12,10 @@ function Header() {
                 </div>
             </div>
             <nav className="row">
-                <a className="col-6 col-md-3 nav-item nav-link bg-danger p-1" href="#">The Public Domain</a>
-                <a className="col-6 col-md-3 nav-item nav-link bg-success p-1" href="#">About</a>
-                <a className="col-6 col-md-3 nav-item nav-link bg-warning p-1" href="#">Contact</a>
-                <a className="col-6 col-md-3 nav-item nav-link bg-info p-1" href="#">Log In / Register</a>
+                <a className="col-6 col-md-3 nav-item nav-link border p-1" href="#">The Public Domain</a>
+                <a className="col-6 col-md-3 nav-item nav-link border p-1" href="#">About</a>
+                <a className="col-6 col-md-3 nav-item nav-link border p-1" href="#">Contact</a>
+                <a className="col-6 col-md-3 nav-item nav-link border p-1" href="#">Log In / Register</a>
             </nav>
         </div>
     )
