@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
+import Header from "./Header";
 //import Splash from "./Splash";
 //import PortfolioCards from "./PortfolioCards";
 //import "./App.css";
@@ -12,32 +13,33 @@ import axios from "axios";
 function App() {
     console.log("Started App")
 
-    const [portfolioData, setPortfolioData] = useState([]);
-    const [page, setPage] = useState("landing");
-    //console.log(menuData);
+    // const [portfolioData, setPortfolioData] = useState([]);
+    // const [page, setPage] = useState("landing");
+    // //console.log(menuData);
     
-    useEffect(() => {
-      let endpoint = "https://8000-rdmullins-rmportfolioba-k4rg5x1d2lk.ws-us77.gitpod.io/api/projects/"
-      axios.get(endpoint)
-        .then((response)=> setPortfolioData(response.data))
-    },[]);
+    // useEffect(() => {
+    //   let endpoint = "https://8000-rdmullins-rmportfolioba-k4rg5x1d2lk.ws-us77.gitpod.io/api/projects/"
+    //   axios.get(endpoint)
+    //     .then((response)=> setPortfolioData(response.data))
+    // },[]);
     
-        //console.log("Inside App function.");
-        //const [post] = React.useState(null);
+    //     //console.log("Inside App function.");
+    //     //const [post] = React.useState(null);
         
   
-        if (portfolioData.length === 0) return (
-          <div className="spinner-border text-primary text-center" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </div>
-          );
+    //     if (portfolioData.length === 0) return (
+    //       <div className="spinner-border text-primary text-center" role="status">
+    //         <span className="visually-hidden">Loading...</span>
+    //       </div>
+    //       );
         
-        console.log(portfolioData);
+    //     console.log(portfolioData);
     
         return (
           <div className="container">
-            {(page === "landing") && <Splash pageUpdater={setPage} />}
-            {(page === "portfolio") && <PortfolioCards pageUpdater={setPage} portfolioData={portfolioData} />}
+            <Header />
+            {/* {(page === "landing") && <Splash pageUpdater={setPage} />}
+            {(page === "portfolio") && <PortfolioCards pageUpdater={setPage} portfolioData={portfolioData} />} */}
             {/* /*{(page > 0 && page != 8) && <Navbar pageUpdater={setPage} />}
             {(page === 1) && <MenuCard page={page} menuData={appetizers} pageUpdater={setPage} />}
             {(page === 2) && <MenuCard page={page} menuData={breakfast} pageUpdater={setPage} />}
