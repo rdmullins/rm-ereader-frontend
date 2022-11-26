@@ -7,6 +7,7 @@ import Search from "./Search";
 import BookCard from "./BookCard";
 import Collections from "./Collections";
 import Categories from "./Categories";
+import Footer from "./Footer";
 //import Splash from "./Splash";
 //import PortfolioCards from "./PortfolioCards";
 //import "./App.css";
@@ -46,6 +47,7 @@ function App() {
             <BookCard />
             <Collections />
             <Categories />
+            <Footer />
             {/* {(page === "landing") && <Splash pageUpdater={setPage} />}
             {(page === "portfolio") && <PortfolioCards pageUpdater={setPage} portfolioData={portfolioData} />} */}
             {/* /*{(page > 0 && page != 8) && <Navbar pageUpdater={setPage} />}
