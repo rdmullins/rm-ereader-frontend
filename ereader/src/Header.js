@@ -6,8 +6,8 @@ function Header() {
             <div className="row">
                 <div className="col">
                     <a className="navbar-brand" href="#">
-                        <Book alt="Logo" width="30" height="24" className="d-inline-block align-text-top"/>
-                        Rog-eReader
+                        <h2><Book alt="Logo" width="30" height="40" className="d-inline-block align-text-top p-1"/>
+                        Rog-eReader</h2>
                     </a>
                 </div>
             </div>
