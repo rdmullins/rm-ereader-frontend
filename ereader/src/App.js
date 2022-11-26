@@ -5,10 +5,11 @@ import axios from "axios";
 import Header from "./Header";
 import Search from "./Search";
 import BookCard from "./BookCard";
+import Collections from "./Collections";
 //import Splash from "./Splash";
 //import PortfolioCards from "./PortfolioCards";
 //import "./App.css";
-//import "./App.css";
+import "./App.css";
 //import Navbar from "./Navbar";
 //import Footer from "./Footer";
 
@@ -42,6 +43,7 @@ function App() {
             <Header />
             <Search />
             <BookCard />
+            <Collections />
             {/* {(page === "landing") && <Splash pageUpdater={setPage} />}
             {(page === "portfolio") && <PortfolioCards pageUpdater={setPage} portfolioData={portfolioData} />} */}
             {/* /*{(page > 0 && page != 8) && <Navbar pageUpdater={setPage} />}
