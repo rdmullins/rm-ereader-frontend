@@ -12,16 +12,16 @@ function Search() {
             <div className="row text-center">
                 <ul className="list-group list-group-horizontal">
                     <li className="col-4 list-group-item border-0">
-                        <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="title"></input>
-                        <label className="form-check-label" for="title">Title</label>
+                        <input className="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="title"></input>
+                        <label className="form-check-label" htmlFor="title">Title</label>
                     </li>
                     <li className="col-4 list-group-item border-0">
-                        <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="author"></input>
-                        <label className="form-check-label" for="author">Author</label>
+                        <input className="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="author"></input>
+                        <label className="form-check-label" htmlFor="author">Author</label>
                     </li>
                     <li className="col-4 list-group-item border-0">
-                        <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="subject"></input>
-                        <label className="form-check-label" for="subject">Subject</label>
+                        <input className="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="subject"></input>
+                        <label className="form-check-label" htmlFor="subject">Subject</label>
                     </li>
                 </ul>
                 {/* <div className="input-group">
