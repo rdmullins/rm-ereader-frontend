@@ -23,6 +23,9 @@ import "./App.css";
 
 function App() {
     console.log("Started App")
+
+    const [view, setView] = useState("home");
+
     // const [portfolioData, setPortfolioData] = useState([]);
     // const [page, setPage] = useState("landing");
     // //console.log(menuData);
@@ -48,12 +51,25 @@ function App() {
         return (
 
           <div className="container">
-            <Header />
-            <Search />
-            <BookCard />
-            <Collections />
-            <Categories />
-            <Footer />
+            {(view === "home") &&
+            <>
+              <Header setView = {setView} />
+              <Search />
+              <BookCard />
+              <Collections />
+              <Categories />
+              <Footer setView = {setView} />
+            </>
+            }
+
+
+
+            {/* <Header setView = {setView} />
+            <Search setView = {setView} />
+            <BookCard setView = {setView} />
+            <Collections setView = {setView} />
+            <Categories setView = {setView} />
+            <Footer setView = {setView} /> */}
 
              {/* {(page === "landing") && <Splash pageUpdater={setPage} />}
           //   {(page === "portfolio") && <PortfolioCards pageUpdater={setPage} portfolioData={portfolioData} />} */}

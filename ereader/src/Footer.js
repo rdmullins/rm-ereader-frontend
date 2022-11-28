@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { HouseFill } from 'react-bootstrap-icons';
 import { List } from 'react-bootstrap-icons';
 import { BookFill } from 'react-bootstrap-icons';
+import { XCircleFill } from 'react-bootstrap-icons';
 import "./App.css";
 
 function Footer() {
@@ -22,9 +23,9 @@ function Footer() {
         <>
             <div className="container border">
                 <div className="row text-center">
-                    <div className="col-4 border"><h4><HouseFill></HouseFill></h4></div>
-                    <div className="col-4 border"><h4><List onClick={toggleMenu}></List></h4></div>
-                    <div className="col-4 border"><h4><BookFill></BookFill></h4></div>
+                    <div className="col-4 border"><h3><HouseFill></HouseFill></h3></div>
+                    <div className="col-4 border"><h3><List onClick={toggleMenu}></List></h3></div>
+                    <div className="col-4 border"><h3><BookFill></BookFill></h3></div>
                 </div>
             </div>
 
@@ -40,9 +41,9 @@ function Footer() {
                     <li>And Here</li>
                 </ul>
                 </p>
-                <button className="close-modal" onClick={toggleMenu}>
-                CLOSE
-                </button>
+                <h2 className="close-modal" onClick={toggleMenu}>
+                    <XCircleFill></XCircleFill>
+                </h2>
             </div>
             </div>
         )}
