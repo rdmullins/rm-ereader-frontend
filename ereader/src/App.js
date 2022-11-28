@@ -8,7 +8,7 @@ import BookCard from "./BookCard";
 import Collections from "./Collections";
 import Categories from "./Categories";
 import Footer from "./Footer";
-import Modal from "./Modal";
+//import Modal from "./Modal";
 //import Splash from "./Splash";
 //import PortfolioCards from "./PortfolioCards";
 //import "./App.css";
@@ -39,7 +39,7 @@ function App() {
     //       );
         
     //     console.log(portfolioData);
-    
+
         return (
           <div className="container">
             <Header />
