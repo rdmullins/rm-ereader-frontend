@@ -9,6 +9,8 @@ function Header() {
 
     const [pubDomain, setPubDomain] = useState(false);
     const [contact, setContact] = useState(false);
+    const [about, setAbout] = useState(false);
+    const [login, setLogin] = useState(false);
 
     function togglePublicDomain() {
         setPubDomain(!pubDomain);
@@ -18,7 +20,15 @@ function Header() {
         setContact(!contact);
     }
 
-    if(pubDomain || contact) {
+    function toggleAbout() {
+        setAbout(!about);
+    }
+
+    function toggleLogin() {
+        setLogin(!login);
+    }
+
+    if(pubDomain || contact || about || login) {
         document.body.classList.add('active-modal')
     } else {
         document.body.classList.remove('active-modal') 
@@ -37,9 +47,9 @@ function Header() {
                 </div>
                 <nav className="row">
                     <div className="col-6 col-md-3 nav-item nav-link border p-1" onClick={togglePublicDomain}>The Public Domain</div>
-                    <a className="col-6 col-md-3 nav-item nav-link border p-1" href="#">About</a>
+                    <div className="col-6 col-md-3 nav-item nav-link border p-1" onClick={toggleAbout}>About</div>
                     <div className="col-6 col-md-3 nav-item nav-link border p-1" onClick={toggleContact}>Contact</div>
-                    <a className="col-6 col-md-3 nav-item nav-link border p-1" href="#">Log In / Register</a>
+                    <div className="col-6 col-md-3 nav-item nav-link border p-1" onClick={toggleLogin}>Login/Register</div>
                 </nav>
             </div>
 
@@ -48,7 +58,7 @@ function Header() {
             <div onClick={togglePublicDomain} className="overlay"></div>
             <div className="modal-content">
                 <h2>What Is the Public Domain?</h2>
-                <p>
+
                 <blockquote cite="https://en.wikipedia.org/wiki/Public_domain">"The public domain (PD) consists of all the creative work to which no 
                 exclusive intellectual property rights apply. Those rights may have 
                 expired, been forfeited, expressly waived, or may be inapplicable. 
@@ -56,20 +66,20 @@ function Header() {
                 those works without permission."
                 </blockquote>
                 <em>- Wikipedia</em>
-                </p>
+
                 <p>
                     Many classic works of literature are in the pubic domain due to the reasons
                     cited above. <em>VoxPublica</em> seeks to make these works available to everyone
                     using familiar e-reader functionality.
                 </p>
-                <p>
+
                     <h4>Additional Information</h4>
                     <ul>
                         <li><a href="https://web.law.duke.edu/cspd/" target="blank">Duke University Center for the Study of the Public Domain</a></li>
                         <li><a href="https://www.gutenberg.org" target="blank">Project Gutenberg</a></li>
                         <li><a href="https://www.librivox.org" target="blank">Librivox</a></li>
                     </ul>
-                </p>
+
                 <h2 className="close-modal" onClick={togglePublicDomain}>
                 <XCircleFill></XCircleFill>
                 </h2>
@@ -91,13 +101,13 @@ function Header() {
                     </div>
                     <div className="row text-center">
                         <div className="col-4">
-                            <h1><a href="mailto:rogermullins.mba@gmail.com"><EnvelopeFill></EnvelopeFill></a></h1>
+                            <h1><a href="mailto:rogermullins.mba@gmail.com" target="blank"><EnvelopeFill></EnvelopeFill></a></h1>
                         </div>
                         <div className="col-4">
-                            <h1><a href="https://www.linkedin.com/in/rdmullins"><Linkedin></Linkedin></a></h1>
+                            <h1><a href="https://www.linkedin.com/in/rdmullins" target="blank"><Linkedin></Linkedin></a></h1>
                         </div>
                         <div className="col-4">
-                            <h1><a href="https://www.github.com/rdmullins"><Github></Github></a></h1>
+                            <h1><a href="https://www.github.com/rdmullins" target="blank"><Github></Github></a></h1>
                         </div>
                     </div>
                 <h2 className="close-modal" onClick={toggleContact}>
@@ -106,6 +116,50 @@ function Header() {
             </div>
             </div>
         )}
+
+        {about && (
+            <div className="modal">
+            <div onClick={toggleAbout} className="overlay"></div>
+            <div className="modal-content">
+                <h2>About</h2>
+                    <p>
+                        Lorem ipsum etc.
+                    </p>
+                <h2 className="close-modal" onClick={toggleAbout}>
+                <XCircleFill></XCircleFill>
+                </h2>
+            </div>
+            </div>
+        )}
+
+        {login && (
+            <div className="modal">
+            <div onClick={toggleLogin} className="overlay"></div>
+            <div className="modal-content">
+                <h2>Log In</h2>
+                <form>
+                    <div className="row mb-3">
+                        <label for="loginEmail" className="col-sm-2 col-form-label">Email</label>
+                        <div className="col-sm-10">
+                            <input type="email" className="form-control" id="loginEmail"/>
+                        </div>
+                    </div>
+                    <div className="row mb-3">
+                        <label for="loginPW" class="col-sm-2 col-form-label">Password</label>
+                        <div className="col-sm-10">
+                            <input type="password" className="form-control" id="loginPW"/>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" className="btn btn-primary">Sign in</button>
+                </form>
+                <h2 className="close-modal" onClick={toggleLogin}>
+                <XCircleFill></XCircleFill>
+                </h2>
+            </div>
+            </div>
+        )}
+
         </>
     )
 };
