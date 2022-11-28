@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { HouseFill } from 'react-bootstrap-icons';
+import { HouseFill, PersonPlus } from 'react-bootstrap-icons';
 import { List } from 'react-bootstrap-icons';
 import { BookFill } from 'react-bootstrap-icons';
 import { XCircleFill } from 'react-bootstrap-icons';
 import "./App.css";
 
-function Footer() {
+function Footer(props) {
 
     const [menu, setMenu] = useState(false);
 
@@ -23,9 +23,9 @@ function Footer() {
         <>
             <div className="container border">
                 <div className="row text-center">
-                    <div className="col-4 border"><h3><HouseFill></HouseFill></h3></div>
+                    <div className="col-4 border"><h3><HouseFill onClick={() => props.setView("home")}></HouseFill></h3></div>
                     <div className="col-4 border"><h3><List onClick={toggleMenu}></List></h3></div>
-                    <div className="col-4 border"><h3><BookFill></BookFill></h3></div>
+                    <div className="col-4 border"><h3><BookFill onClick={() => props.setView("myBooks")}></BookFill></h3></div>
                 </div>
             </div>
 
