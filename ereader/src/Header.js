@@ -37,7 +37,7 @@ function Header() {
     return (
         <>
             <div className="container">
-                <div className="row">
+                <div className="row p-2">
                     <div className="col">
                         <a className="navbar-brand" href="#">
                             <h2><Book alt="Logo" width="30" height="40" className="d-inline-block align-text-top p-1"/>
@@ -45,7 +45,7 @@ function Header() {
                         </a>
                     </div>
                 </div>
-                <nav className="row">
+                <nav className="row text-center bg-info opacity-75">
                     <div className="col-6 col-md-3 nav-item nav-link border p-1" onClick={togglePublicDomain}>The Public Domain</div>
                     <div className="col-6 col-md-3 nav-item nav-link border p-1" onClick={toggleAbout}>About</div>
                     <div className="col-6 col-md-3 nav-item nav-link border p-1" onClick={toggleContact}>Contact</div>

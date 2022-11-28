@@ -22,6 +22,7 @@ let coverScroll = {};
 
     return (
         <>
+            <div className="container">
             <div className="row">
                 <div className="border col-12 col-md-8 d-inline-block p-2 vh-25">
                     <div className="row text-center g-0">
@@ -41,6 +42,7 @@ let coverScroll = {};
                     </div>
                     
                 </div>
+            </div>
             </div>
         </>
     );
