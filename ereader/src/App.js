@@ -26,6 +26,7 @@ function App() {
     console.log("Started App")
 
     const [view, setView] = useState("home");
+    const [searchTerm, setSearchTerm] = useState("");
 
     // const [portfolioData, setPortfolioData] = useState([]);
     // const [page, setPage] = useState("landing");
@@ -55,7 +56,7 @@ function App() {
             {(view === "home") &&
             <>
               <Header setView = {setView} />
-              <Search />
+              <Search searchTerm = {searchTerm} setSearchTerm = {setSearchTerm}/>
               <BookCard />
               <Collections />
               <Categories />
