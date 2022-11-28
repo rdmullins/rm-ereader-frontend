@@ -24,22 +24,6 @@ function Search() {
                         <label className="form-check-label" htmlFor="subject">Subject</label>
                     </li>
                 </ul>
-                {/* <div className="input-group">
-                    <div className="input-group-text">
-                        <div className="col-4">
-                            <input className="form-check-input mt-0" type="radio" value="" aria-label="Radio Button for Title Search"></input>
-                            Title
-                        </div>
-                        <div className="col-4">
-                            <input className="form-check-input mt-0" type="radio" value="" aria-label="Radio Button for Author Search"></input>
-                            Author (Last Name)
-                        </div>
-                        <div className="col-4">
-                            <input className="form-check-input mt-0" type="radio" value="" aria-label="Radio Button for Subject Search"></input>
-                            Subject
-                        </div>
-                    </div> 
-                </div> */}
             </div>
         </div>
     )
