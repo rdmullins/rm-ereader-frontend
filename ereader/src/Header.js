@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { Book } from 'react-bootstrap-icons';
+import { Book, PersonPlus } from 'react-bootstrap-icons';
 import { XCircleFill } from 'react-bootstrap-icons';
 import { EnvelopeFill, Linkedin, Github } from 'react-bootstrap-icons';
 //import { }
 import "./App.css";
 
-function Header() {
+function Header(props) {
 
     const [pubDomain, setPubDomain] = useState(false);
     const [contact, setContact] = useState(false);
@@ -38,7 +38,7 @@ function Header() {
         <>
             <div className="container">
                 <div className="row p-2">
-                    <div className="col">
+                    <div className="col" onClick={() => props.setView("home")}>
                         <a className="navbar-brand" href="#">
                             <h2><Book alt="Logo" width="30" height="40" className="d-inline-block align-text-top p-1"/>
                             Rog-eReader</h2>
