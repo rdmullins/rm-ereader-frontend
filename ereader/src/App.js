@@ -11,6 +11,7 @@ import Collections from "./Collections";
 import Categories from "./Categories";
 import Footer from "./Footer";
 import MyBooks from "./MyBooks"
+import SearchView from "./SearchView";
 //import Modal from "./Modal";
 //import Splash from "./Splash";
 //import PortfolioCards from "./PortfolioCards";
@@ -27,6 +28,7 @@ function App() {
 
     const [view, setView] = useState("home");
     const [searchTerm, setSearchTerm] = useState("");
+    const [searchType, setSearchType] = useState("title");
 
     // const [portfolioData, setPortfolioData] = useState([]);
     // const [page, setPage] = useState("landing");
@@ -55,20 +57,47 @@ function App() {
           <div className="container">
             {(view === "home") &&
             <>
-              <Header setView = {setView} />
-              <Search searchTerm = {searchTerm} setSearchTerm = {setSearchTerm}/>
+              <Header 
+                setView = {setView} />
+              <Search 
+                searchTerm = {searchTerm} 
+                setSearchTerm = {setSearchTerm} 
+                searchType = {searchType} 
+                setSearchType = {setSearchType}
+                setView = {setView}/>
               <BookCard />
               <Collections />
               <Categories />
-              <Footer setView = {setView} />
+              <Footer 
+                setView = {setView} />
             </>
             }
 
             {(view === "myBooks") &&
             <>
-              <Header setView = {setView} />
+              <Header 
+                setView = {setView} />
               <MyBooks />
-              <Footer setView = {setView} />
+              <Footer 
+                setView = {setView} />
+            </>
+            }
+
+            {(view === "search") && 
+            <>
+              <Header setView = {setView} />
+              <Search 
+                searchTerm = {searchTerm} 
+                setSearchTerm = {setSearchTerm} 
+                searchType = {searchType} 
+                setSearchType = {setSearchType}
+                setView = {setView}/>
+              <SearchView 
+                searchType = {searchType} 
+                searchTerm = {searchTerm} />
+              <BookCard />
+              <Footer 
+                setView = {setView} />
             </>
             }
 

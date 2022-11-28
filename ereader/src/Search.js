@@ -13,14 +13,18 @@ function Search(props) {
         console.log("Type of Search:");
         if (e.target[2].checked) {
             console.log("Title");
+            props.setSearchType("title");
         }
         if (e.target[3].checked) {
             console.log("Author");
+            props.setSearchType("author");
         }
         if (e.target[4].checked) {
             console.log("Subject");
+            props.setSearchType("subject");
         }
-        props.setSearchTerm("");
+        //props.setSearchTerm("");
+        props.setView("search");
     }
 
     return (
