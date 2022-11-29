@@ -43,7 +43,8 @@ function Footer(props) {
 
         let e = document.getElementsByClassName("modal");
         for (let i=0; i<e.length; i++) {
-            e[i].classList.remove("dark-mode-modal")
+            //e[i].classList.add("modal-content");
+            e[i].classList.remove("dark-mode-modal");
         };
     }
 
@@ -51,9 +52,9 @@ function Footer(props) {
         <>
             <div className="container sticky-bottom">
                 <div className="row text-center">
-                    <div className="col-4"><h3><HouseFill onClick={() => props.setView("home")}></HouseFill></h3></div>
-                    <div className="col-4"><h3><List onClick={toggleMenu}></List></h3></div>
-                    <div className="col-4"><h3><BookFill onClick={() => props.setView("myBooks")}></BookFill></h3></div>
+                    <div className="col-4 clickable"><h3><HouseFill onClick={() => props.setView("home")}></HouseFill></h3></div>
+                    <div className="col-4 clickable"><h3><List onClick={toggleMenu}></List></h3></div>
+                    <div className="col-4 clickable"><h3><BookFill onClick={() => props.setView("myBooks")}></BookFill></h3></div>
                 </div>
             </div>
 
