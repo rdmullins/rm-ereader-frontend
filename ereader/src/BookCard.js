@@ -21,7 +21,7 @@ function BookCard() {
                 </div>
             </div>
         </div>
-            <div className="col-12 col-md-4">
+            <div className="col-12 col-md-4 p-2">
                 <h3>Title</h3>
                 <p>Description</p>
             </div>
