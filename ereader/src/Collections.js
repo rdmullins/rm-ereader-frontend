@@ -24,13 +24,13 @@ let coverScroll = {};
         <>
             <div className="container">
             <div className="row">
-                <div className="border col-12 col-md-8 d-inline-block p-2 vh-25">
-                    <div className="row text-center g-0">
-                        <div className="border d-inline-block p-2 overflow-auto vh-25">{coverScroll}</div>
+                <div className="col-12 col-md-8 d-inline-block p-2 vh-25">
+                    <div className="row text-center g-0 border">
+                        <div className="d-inline-block p-2 overflow-auto vh-25">{coverScroll}</div>
                     </div>
                 </div>
                 
-                <div className="border col-12 col-md-4 d-inline-block vh-25 p-2">
+                <div className="col-12 col-md-4 d-inline-block vh-25 p-2">
 
                     <div>
                         <h4>Collections</h4>

@@ -34,6 +34,30 @@ function Header(props) {
         document.body.classList.remove('active-modal') 
     }
 
+    if (props.darkMode) {
+        document.body.classList.remove("bg-light");
+        document.body.classList.remove("text-dark");
+        document.body.classList.add("bg-dark");
+        document.body.classList.add("text-light");
+
+        let e = document.getElementsByClassName("modal-content");
+        for (let i=0; i<e.length; i++) {
+            e[i].classList.add("dark-mode-modal");
+            e[i].classList.remove("modal-content");
+        }
+
+    } else {
+        document.body.classList.remove("bg-dark");
+        document.body.classList.remove("text-light");
+        document.body.classList.add("bg-light");
+        document.body.classList.add("text-dark");
+
+        let e = document.getElementsByClassName("modal");
+        for (let i=0; i<e.length; i++) {
+            e[i].classList.remove("dark-mode-modal")
+        };
+    }
+
     return (
         <>
             <div className="container">
@@ -45,11 +69,11 @@ function Header(props) {
                         </a>
                     </div>
                 </div>
-                <nav className="row text-center bg-info opacity-75">
-                    <div className="col-6 col-md-3 nav-item nav-link border p-1" onClick={togglePublicDomain}>The Public Domain</div>
-                    <div className="col-6 col-md-3 nav-item nav-link border p-1" onClick={toggleAbout}>About</div>
-                    <div className="col-6 col-md-3 nav-item nav-link border p-1" onClick={toggleContact}>Contact</div>
-                    <div className="col-6 col-md-3 nav-item nav-link border p-1" onClick={toggleLogin}>Login/Register</div>
+                <nav className="row text-center">
+                    <div className="col-6 col-md-3 nav-item nav-link bg-info opacity-75 border p-1 clickable" onClick={togglePublicDomain}>The Public Domain</div>
+                    <div className="col-6 col-md-3 nav-item nav-link bg-info opacity-75 border p-1 clickable" onClick={toggleAbout}>About</div>
+                    <div className="col-6 col-md-3 nav-item nav-link bg-info opacity-75 border p-1 clickable" onClick={toggleContact}>Contact</div>
+                    <div className="col-6 col-md-3 nav-item nav-link bg-info opacity-75 border p-1 clickable" onClick={toggleLogin}>Login/Register</div>
                 </nav>
             </div>
 
@@ -145,7 +169,7 @@ function Header(props) {
                         </div>
                     </div>
                     <div className="row mb-3">
-                        <label for="loginPW" class="col-sm-2 col-form-label">Password</label>
+                        <label for="loginPW" className="col-sm-2 col-form-label">Password</label>
                         <div className="col-sm-10">
                             <input type="password" className="form-control" id="loginPW"/>
                         </div>

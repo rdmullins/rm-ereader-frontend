@@ -1,21 +1,22 @@
 function BookCard() {
     return (
-        <div className="container border">
+        <div className="container">
         <div className="row">
         <div className="card mb-3 col-12 col-md-8">
             <div className="row">
                 <div className="card-body">
                     <div className="row">
-                        <div className="col-4">
+                        <div className="col-3">
                             <img src="./logo192.png" className="img-fluid border"></img>
                         </div>
-                        <div className="col-5">
+                        <div className="col-6">
                             <h5>Title</h5>
                             <p>Author</p>
                         </div>
                         <div className="col-3">
-                            <button>Read Now</button>
-                            <button>Listen Now</button>
+                            <button type="button" className="btn w-100 m-1 btn-info">Read Now</button>
+                            <button type="button" className="btn w-100 m-1 btn-info">Listen Now</button>
+                            <button type="button" className="btn w-100 m-1 btn-info">Info</button>
                         </div>
                     </div>
                 </div>
