@@ -13,10 +13,27 @@
     width: 8vh;
 }
 
+.clickable {
+    cursor: hand;
+}
+
 /* MODAL */
 
 body.active-modal {
     overflow-y: hidden;
+}
+
+.dark-mode-modal {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1.4;
+    background: darkgray;
+    padding: 14px 28px;
+    border-radius: 3px;
+    max-width: 600px;
+    min-width: 300px;
 }
 
 .btn-modal {

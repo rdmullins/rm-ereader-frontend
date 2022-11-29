@@ -29,6 +29,7 @@ function App() {
     const [view, setView] = useState("home");
     const [searchTerm, setSearchTerm] = useState("");
     const [searchType, setSearchType] = useState("title");
+    const [darkMode, setDarkMode] = useState(false);
 
     // const [portfolioData, setPortfolioData] = useState([]);
     // const [page, setPage] = useState("landing");
@@ -58,46 +59,60 @@ function App() {
             {(view === "home") &&
             <>
               <Header 
-                setView = {setView} />
+                setView = {setView}
+                darkMode = {darkMode} />
               <Search 
                 searchTerm = {searchTerm} 
                 setSearchTerm = {setSearchTerm} 
                 searchType = {searchType} 
                 setSearchType = {setSearchType}
                 setView = {setView}/>
+              <hr></hr>
               <BookCard />
               <Collections />
               <Categories />
+              <hr></hr>
               <Footer 
-                setView = {setView} />
+                setView = {setView} 
+                darkMode = {darkMode}
+                setDarkMode = {setDarkMode}/>
             </>
             }
 
             {(view === "myBooks") &&
             <>
               <Header 
-                setView = {setView} />
+                setView = {setView}
+                darkMode = {darkMode} />
               <MyBooks />
+              <hr></hr>
               <Footer 
-                setView = {setView} />
+                setView = {setView}
+                darkMode = {darkMode}
+                setDarkMode = {setDarkMode}/>
             </>
             }
 
             {(view === "search") && 
             <>
-              <Header setView = {setView} />
+              <Header setView = {setView}
+              darkMode = {darkMode} />
               <Search 
                 searchTerm = {searchTerm} 
                 setSearchTerm = {setSearchTerm} 
                 searchType = {searchType} 
                 setSearchType = {setSearchType}
                 setView = {setView}/>
+              <hr></hr>
               <SearchView 
                 searchType = {searchType} 
                 searchTerm = {searchTerm} />
               <BookCard />
+              <hr></hr>
               <Footer 
-                setView = {setView} />
+                setView = {setView}
+                darkMode = {darkMode}
+                setDarkMode = {setDarkMode}/>
             </>
             }
 

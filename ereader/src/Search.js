@@ -53,6 +53,7 @@ function Search(props) {
                 <div className="col-1"></div>
             </div>
             <div className="row text-center">
+                <div className="col">
                 <ul className="list-group list-group-horizontal">
                     <li className="col-4 list-group-item border-0">
                         <input 
@@ -98,6 +99,7 @@ function Search(props) {
                         </label>
                     </li>
                 </ul>
+                </div>
             </div>
             </form>
         </div>
