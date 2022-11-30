@@ -1,45 +1,59 @@
 // Imports go Here
 import React, { useState, useEffect } from "react";
-import { ReactDOM } from "react";
-//import { Modal } from "react-modal";
+// import { ReactDOM } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import Header from "./Header";
 import Search from "./Search";
+import FeaturedBook from "./FeaturedBook";
 import BookCard from "./BookCard";
 import Collections from "./Collections";
 import Categories from "./Categories";
 import Footer from "./Footer";
 import MyBooks from "./MyBooks"
 import SearchView from "./SearchView";
-//import Modal from "./Modal";
-//import Splash from "./Splash";
-//import PortfolioCards from "./PortfolioCards";
-//import "./App.css";
 import "./App.css";
-//import Navbar from "./Navbar";
-//import Footer from "./Footer";
 
-
-//Modal.setAppElement('App');
 
 function App() {
     console.log("Started App")
-
+    const [featuredBookData, setFeaturedBookData] = useState([]);
+    const [bookData, setBookData] = useState([]);
     const [view, setView] = useState("home");
     const [searchTerm, setSearchTerm] = useState("");
     const [searchType, setSearchType] = useState("title");
     const [darkMode, setDarkMode] = useState(false);
 
-    // const [portfolioData, setPortfolioData] = useState([]);
-    // const [page, setPage] = useState("landing");
-    // //console.log(menuData);
+     // Pull a random book for the featured box on the front page
+
+    let bookId = Math.floor(Math.random()*5)
+
+    useEffect(() => {
+      let endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us77.gitpod.io/books/author_book/${bookId}/`
+      axios.get(endpoint)
+        .then((response)=> setFeaturedBookData(response.data))
+    },[]);
+
+    // TEST Pulls All Books for Search Screen
+
+    useEffect(() => {
+      let endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us77.gitpod.io/books/author_books/`
+      axios.get(endpoint)
+        .then((response)=> setBookData(response.data))
+    },[]);
+
+    //};
+
+    // localStorage.setItem("featuredBook", featuredBookData);
     
-    // useEffect(() => {
-    //   let endpoint = "https://8000-rdmullins-rmportfolioba-k4rg5x1d2lk.ws-us77.gitpod.io/api/projects/"
-    //   axios.get(endpoint)
-    //     .then((response)=> setPortfolioData(response.data))
-    // },[]);
+    // featuredBookDisplay = featuredBookData;
+
+    // Pull a random featured book for the front page
+
+    //setFeaturedBookData(JSON.parse(localStorage.getItem("featuredBook")));
+
+    console.log(featuredBookData);
+    console.log(bookData);
     
     //     //console.log("Inside App function.");
     //     //const [post] = React.useState(null);
@@ -68,7 +82,13 @@ function App() {
                 setSearchType = {setSearchType}
                 setView = {setView}/>
               <hr></hr>
-              <BookCard />
+              <FeaturedBook
+                featuredBookData = {featuredBookData} />
+              {/* <>
+                {featuredBookDisplay}
+              </> */}
+              {/* <BookCard 
+                featuredBookData = {featuredBookData} /> */}
               <Collections />
               <Categories />
               <hr></hr>
@@ -106,7 +126,8 @@ function App() {
               <hr></hr>
               <SearchView 
                 searchType = {searchType} 
-                searchTerm = {searchTerm} />
+                searchTerm = {searchTerm}
+                bookData = {bookData} />
               <BookCard />
               <hr></hr>
               <Footer 
@@ -119,5 +140,5 @@ function App() {
           </div>
         );
       
-          };      
-      export default App;
+  };      
+export default App;

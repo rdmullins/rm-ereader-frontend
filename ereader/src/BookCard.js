@@ -1,4 +1,15 @@
-function BookCard() {
+function BookCard(props) {
+
+    // let x = Math.floor(Math.random() * props.bookData.length);
+
+    // console.log("Random book = ", x);
+
+    // let title = props.bookData[x].title;
+    // let desc = props.bookData[x].description;
+
+    // console.log(title);
+    // console.log(desc);
+
     return (
         <div className="container">
         <div className="row">
