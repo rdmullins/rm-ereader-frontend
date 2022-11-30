@@ -9,29 +9,42 @@ function Search(props) {
     //     console.log(e);
     // }
 
+    let endpoint = "";
+
     function handleFormSubmit(e) {
         // console.log("Form submitted.");
         // console.log("Search Term: ", props.searchTerm);
         // console.log("Type of Search:");
         if (e.target[2].checked) {
             //console.log("Title");
-            props.setSearchType("title");
+            props.setSearchType("Title");
+            endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us77.gitpod.io/books/booksearch/?search=${props.searchTerm}`
+            props.setSearchEndpoint(endpoint);
+
         }
         if (e.target[3].checked) {
             //console.log("Author");
-            props.setSearchType("author");
+            props.setSearchType("Author");
+            endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us77.gitpod.io/books/authorsearch/?search=${props.searchTerm}`
+            props.setSearchEndpoint(endpoint);
         }
         if (e.target[4].checked) {
             //console.log("Subject");
-            props.setSearchType("subject");
+            props.setSearchType("Subject");
+            endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us77.gitpod.io/books/subjectsearch/?search=${props.searchTerm}`
+            props.setSearchEndpoint(endpoint);
         }
         //props.setSearchTerm("");
         props.setView("search");
+
     }
 
     return (
         <div className="container border p-1">
-            <form onSubmit={(e) => handleFormSubmit(e, props.searchTerm)}>
+            <form onSubmit={(e) => {
+                e.preventDefault();
+                handleFormSubmit(e, props.searchTerm)
+            }}>
             <div className="row">
                 <div className="col-1"></div>
                 <div className="col-10 input-group mb-3">

@@ -21,12 +21,13 @@ function App() {
     const [bookData, setBookData] = useState([]);
     const [view, setView] = useState("home");
     const [searchTerm, setSearchTerm] = useState("");
-    const [searchType, setSearchType] = useState("title");
+    const [searchType, setSearchType] = useState("Title");
     const [darkMode, setDarkMode] = useState(false);
+    const [searchEndpoint, setSearchEndpoint] = useState("");
 
      // Pull a random book for the featured box on the front page
 
-    let bookId = Math.floor(Math.random()*5)
+    let bookId = Math.floor((Math.random()*5)+1)
 
     useEffect(() => {
       let endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us77.gitpod.io/books/author_book/${bookId}/`
@@ -37,10 +38,12 @@ function App() {
     // TEST Pulls All Books for Search Screen
 
     useEffect(() => {
-      let endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us77.gitpod.io/books/author_books/`
-      axios.get(endpoint)
-        .then((response)=> setBookData(response.data))
-    },[]);
+      if (searchEndpoint != "") {
+        let endpoint = searchEndpoint
+        axios.get(endpoint)
+          .then((response)=> setBookData(response.data))
+      }
+    },[searchEndpoint]);
 
     //};
 
@@ -53,7 +56,7 @@ function App() {
     //setFeaturedBookData(JSON.parse(localStorage.getItem("featuredBook")));
 
     console.log(featuredBookData);
-    console.log(bookData);
+    console.log("BOOKDATA FROM APP LEVEL:", bookData);
     
     //     //console.log("Inside App function.");
     //     //const [post] = React.useState(null);
@@ -80,7 +83,9 @@ function App() {
                 setSearchTerm = {setSearchTerm} 
                 searchType = {searchType} 
                 setSearchType = {setSearchType}
-                setView = {setView}/>
+                setView = {setView}
+                searchEndpoint = {searchEndpoint}
+                setSearchEndpoint = {setSearchEndpoint}/>
               <hr></hr>
               <FeaturedBook
                 featuredBookData = {featuredBookData} />
@@ -122,13 +127,14 @@ function App() {
                 setSearchTerm = {setSearchTerm} 
                 searchType = {searchType} 
                 setSearchType = {setSearchType}
-                setView = {setView}/>
+                setView = {setView}
+                searchEndpoint = {searchEndpoint}
+                setSearchEndpoint = {setSearchEndpoint}/>
               <hr></hr>
               <SearchView 
                 searchType = {searchType} 
                 searchTerm = {searchTerm}
                 bookData = {bookData} />
-              <BookCard />
               <hr></hr>
               <Footer 
                 setView = {setView}

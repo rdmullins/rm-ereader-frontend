@@ -7,7 +7,7 @@ function FeaturedBook(props) {
 
     //     )
 
-    // const {featuredBookData : {}} = props.featuredBookData;
+    // const {featuredBookData = {}} = props;
 
     // const {
     //     id: 0;
@@ -74,7 +74,7 @@ function FeaturedBook(props) {
                                     <div className="card-body">
                                         <div className="row">
                                             <div className="col-3">
-                                                <img src={`https://www.gutenberg.org/cache/epub/${props.featuredBookData?.book[0].gut_id}/pg${props.featuredBookData?.book[0].gut_id}.cover.medium.jpg`} className="img-fluid border" alt="Cover Image"></img>
+                                                <img src={`https://www.gutenberg.org/cache/epub/${props.featuredBookData?.book[0].gut_id}/pg${props.featuredBookData?.book[0].gut_id}.cover.medium.jpg`} className="img-fluid border" alt="Book Cover"></img>
                                             </div>
                                             <div className="col-6">
                                                 <h4><em>{props.featuredBookData?.book[0].title}</em></h4>
