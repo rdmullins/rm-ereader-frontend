@@ -51,6 +51,7 @@ function FeaturedBook(props) {
 
     const [featuredBookInfo, setFeaturedBookInfo] = useState(false);
 
+
     function toggleFeaturedBookInfo() {
         setFeaturedBookInfo(!featuredBookInfo);
     }
@@ -92,7 +93,7 @@ function FeaturedBook(props) {
                                                 </p>
                                             </div>
                                             <div className="col-3">
-                                                <button type="button" className="btn w-100 m-1 btn-info">Read Now</button>
+                                                <button type="button" className="btn w-100 m-1 btn-info" onClick={() => props.setView("EPub")}>Read Now</button>
                                                 <button type="button" className="btn w-100 m-1 btn-info">Listen Now</button>
                                                 <button type="button" className="btn w-100 m-1 btn-info" onClick={() => toggleFeaturedBookInfo()}>Info</button>
                                             </div>
