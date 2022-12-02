@@ -12,6 +12,8 @@ import Categories from "./Categories";
 import Footer from "./Footer";
 import MyBooks from "./MyBooks"
 import SearchView from "./SearchView";
+import EPub from "./EPub";
+import EPub2 from "./EPub2";
 import "./App.css";
 
 
@@ -38,7 +40,7 @@ function App() {
     // TEST Pulls All Books for Search Screen
 
     useEffect(() => {
-      if (searchEndpoint != "") {
+      if (searchEndpoint !== "") {
         let endpoint = searchEndpoint
         axios.get(endpoint)
           .then((response)=> setBookData(response.data))
@@ -88,7 +90,8 @@ function App() {
                 setSearchEndpoint = {setSearchEndpoint}/>
               <hr></hr>
               <FeaturedBook
-                featuredBookData = {featuredBookData} />
+                featuredBookData = {featuredBookData}
+                setView = {setView} />
               {/* <>
                 {featuredBookDisplay}
               </> */}
@@ -101,6 +104,7 @@ function App() {
                 setView = {setView} 
                 darkMode = {darkMode}
                 setDarkMode = {setDarkMode}/>
+              <button onClick={() => setView(EPub2)}>EPub Reader Demo</button>
             </>
             }
 
@@ -140,6 +144,32 @@ function App() {
                 setView = {setView}
                 darkMode = {darkMode}
                 setDarkMode = {setDarkMode}/>
+            </>
+            }
+
+            {(view === "EPub") && 
+            <>
+              <Header setView = {setView}
+              darkMode = {darkMode} />
+              <EPub 
+                featuredBookData = {featuredBookData}
+                bookData = {bookData}/>
+              <Footer 
+                setView = {setView}
+                darkMode = {darkMode}
+                setDarkMode = {setDarkMode}/>
+            </>
+            }
+
+            {(view === "EPub2") &&
+            <>
+              <Header setView = {setView}
+                darkMode = {darkMode} />
+              <EPub2 />
+              <Footer
+                setView = {setView}
+                darkMode = {darkMode}
+                setDarkMode = {setDarkMode} />
             </>
             }
 

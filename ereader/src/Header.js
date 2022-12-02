@@ -60,12 +60,12 @@ function Header(props) {
 
     return (
         <>
-            <div className="container">
+            <div className="container sticky-top">
                 <div className="row p-2">
                     <div className="col" onClick={() => props.setView("home")}>
                         <a className="navbar-brand" href="#">
                             <h2><Book alt="Logo" width="30" height="40" className="d-inline-block align-text-top p-1"/>
-                            Rog-eReader</h2>
+                            VoxPublica</h2>
                         </a>
                     </div>
                 </div>
