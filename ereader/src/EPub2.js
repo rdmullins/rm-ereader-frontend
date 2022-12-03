@@ -67,7 +67,8 @@ export default function EPub2() {
         <ReactReader
           location={location}
           locationChanged={locationChanged}
-          url={"https://gerhardsletten.github.io/react-reader/files/alice.epub"}
+          // url={"https://gerhardsletten.github.io/react-reader/files/alice.epub"}
+          url = {"https://drive.google.com/uc?id=1bR-kxc_m4boe69fYKVGtLPhiD-ElAiG4/view?usp=sharing"}
           styles={ownStyles}
           getRendition={(rendition) => {
             renditionRef.current = rendition;
