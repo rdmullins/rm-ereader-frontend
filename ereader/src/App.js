@@ -1,5 +1,7 @@
 // Imports go Here
 import React, { useState, useEffect } from "react";
+import {initializeApp} from 'firebase/app';
+import {getFirestore, collection, getDocs} from 'firebase/firestore/lite';
 // import { ReactDOM } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
@@ -30,6 +32,19 @@ function App() {
     const [searchResultEndpoint, setSearchResultEndpoint] = useState(""); 
     const [searchResultBook, setSearchResultBook] = useState([]);
     const [etextId, setEtextId] = useState(0);
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCHV95x4hl07pZdXsvAdHGp8Ce2k7dXmoY",
+      authDomain: "rm-ereader.firebaseapp.com",
+      projectId: "rm-ereader",
+      storageBucket: "rm-ereader.appspot.com",
+      messagingSenderId: "608792239689",
+      appId: "1:608792239689:web:86b5ce51b7c5e7a4b2e998",
+      measurementId: "G-S1DVNPNNLY"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
      // Pull a random book for the featured box on the front page
 
@@ -98,6 +113,7 @@ function App() {
         return (
 
           <div className="container">
+
             {(view === "home") &&
             <>
               <Header 
