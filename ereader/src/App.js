@@ -14,6 +14,7 @@ import MyBooks from "./MyBooks"
 import SearchView from "./SearchView";
 import EPub from "./EPub";
 import EPub2 from "./EPub2";
+import TestRSS from "./TestRSS";
 import "./App.css";
 
 
@@ -26,16 +27,36 @@ function App() {
     const [searchType, setSearchType] = useState("Title");
     const [darkMode, setDarkMode] = useState(false);
     const [searchEndpoint, setSearchEndpoint] = useState("");
+    const [searchResultEndpoint, setSearchResultEndpoint] = useState(""); 
+    const [searchResultBook, setSearchResultBook] = useState([]);
+    const [etextId, setEtextId] = useState(0);
 
      // Pull a random book for the featured box on the front page
 
-    let bookId = Math.floor((Math.random()*5)+1)
+    let bookId = Math.floor((Math.random()*5)+2)
+
+    function handleDemoClick() {
+      setView("EPub2");
+    }
+
+    function handleRSSClick() {
+      setView("RSS");
+    }
 
     useEffect(() => {
       let endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us77.gitpod.io/books/author_book/${bookId}/`
       axios.get(endpoint)
         .then((response)=> setFeaturedBookData(response.data))
+        .then(console.log("Featured Book: ", featuredBookData));
     },[]);
+
+    useEffect(() => {
+      axios.get(searchResultEndpoint)
+      .then((response)=> setSearchResultBook(response.data))
+      .then(console.log("Search result endpoint change detected. Inside App UseEffect for search results - book ID is", searchResultBook))
+      .then(console.log("The search URL was ", searchResultEndpoint));
+    },[searchResultEndpoint]);
+
 
     // TEST Pulls All Books for Search Screen
 
@@ -44,6 +65,8 @@ function App() {
         let endpoint = searchEndpoint
         axios.get(endpoint)
           .then((response)=> setBookData(response.data))
+          .then(console.log("Search Endpoint change detected."))
+          .then(setSearchResultEndpoint(`https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us77.gitpod.io/books/author_book/${bookData.bookId}/`))
       }
     },[searchEndpoint]);
 
@@ -57,8 +80,8 @@ function App() {
 
     //setFeaturedBookData(JSON.parse(localStorage.getItem("featuredBook")));
 
-    console.log(featuredBookData);
-    console.log("BOOKDATA FROM APP LEVEL:", bookData);
+    //console.log(featuredBookData);
+    //console.log("BOOKDATA FROM APP LEVEL:", bookData);
     
     //     //console.log("Inside App function.");
     //     //const [post] = React.useState(null);
@@ -87,7 +110,11 @@ function App() {
                 setSearchType = {setSearchType}
                 setView = {setView}
                 searchEndpoint = {searchEndpoint}
-                setSearchEndpoint = {setSearchEndpoint}/>
+                setSearchEndpoint = {setSearchEndpoint}
+                setSearchResultEndpoint = {setSearchResultEndpoint}
+                setSearchResultBook = {setSearchResultBook}
+                etextId = {etextId}
+                setEtextId = {setEtextId} />
               <hr></hr>
               <FeaturedBook
                 featuredBookData = {featuredBookData}
@@ -104,7 +131,8 @@ function App() {
                 setView = {setView} 
                 darkMode = {darkMode}
                 setDarkMode = {setDarkMode}/>
-              <button onClick={() => setView(EPub2)}>EPub Reader Demo</button>
+              <button onClick={() => handleDemoClick()}>EPub Reader Demo</button>
+              {/* <button onClick={() => handleRSSClick()}>RSS Reader Demo</button> */}
             </>
             }
 
@@ -133,12 +161,20 @@ function App() {
                 setSearchType = {setSearchType}
                 setView = {setView}
                 searchEndpoint = {searchEndpoint}
-                setSearchEndpoint = {setSearchEndpoint}/>
+                setSearchEndpoint = {setSearchEndpoint}
+                setSearchResultEndpoint = {setSearchResultEndpoint}
+                setSearchResultBook = {setSearchResultBook} 
+                etextId = {etextId}
+                setEtextId = {setEtextId} />
               <hr></hr>
               <SearchView 
                 searchType = {searchType} 
+                setView = {setView}
                 searchTerm = {searchTerm}
-                bookData = {bookData} />
+                bookData = {bookData}
+                searchResultBook = {searchResultBook} 
+                etextId = {etextId}
+                setEtextId = {setEtextId} />
               <hr></hr>
               <Footer 
                 setView = {setView}
@@ -153,7 +189,9 @@ function App() {
               darkMode = {darkMode} />
               <EPub 
                 featuredBookData = {featuredBookData}
-                bookData = {bookData}/>
+                bookData = {bookData} 
+                etextId = {etextId}
+                setEtextId = {setEtextId} />
               <Footer 
                 setView = {setView}
                 darkMode = {darkMode}
@@ -166,6 +204,18 @@ function App() {
               <Header setView = {setView}
                 darkMode = {darkMode} />
               <EPub2 />
+              <Footer
+                setView = {setView}
+                darkMode = {darkMode}
+                setDarkMode = {setDarkMode} />
+            </>
+            }
+
+            {(view === "RSS") &&
+            <>
+              <Header setview = {setView}
+                darkMode = {darkMode} />
+              <TestRSS />
               <Footer
                 setView = {setView}
                 darkMode = {darkMode}

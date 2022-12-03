@@ -1,4 +1,6 @@
 import axios from "axios";
+import { useState } from "react";
+import { useEffect } from "react";
 
 function Search(props) {
 
@@ -9,9 +11,11 @@ function Search(props) {
     //     console.log(e);
     // }
 
+
     let endpoint = "";
 
     function handleFormSubmit(e) {
+
         // console.log("Form submitted.");
         // console.log("Search Term: ", props.searchTerm);
         // console.log("Type of Search:");
@@ -34,6 +38,7 @@ function Search(props) {
             endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us77.gitpod.io/books/subjectsearch/?search=${props.searchTerm}`
             props.setSearchEndpoint(endpoint);
         }
+
         //props.setSearchTerm("");
         props.setView("search");
 
