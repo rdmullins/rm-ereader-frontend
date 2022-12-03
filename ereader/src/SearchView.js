@@ -33,7 +33,7 @@ function SearchView(props) {
                                 </div>
                                 <div className="col-6">
                                     <h5><em>{book.title}</em></h5>
-                                    <p>
+                                    {/* <p>
                                         <strong>
                                             {book.author && book.author[0].first_name} &nbsp;
                                             {book.author && book.author[0].last_name} &nbsp;   
@@ -44,10 +44,15 @@ function SearchView(props) {
                                             -
                                             {book.author && book.author[0].dod}
                                         )
-                                    </p>
+                                    </p> */}
                                 </div>
                                 <div className="col-3">
-                                    <button type="button" className="btn w-100 m-1 btn-info">Read Now</button>
+                                    <button type="button" className="btn w-100 m-1 btn-info" onClick={() => 
+                                        {    
+                                        props.setEtextId(book.gut_id);
+                                        props.setView("EPub");}}>
+                                                Read Now
+                                    </button>
                                     <button type="button" className="btn w-100 m-1 btn-info">Listen Now</button>
                                     <button type="button" className="btn w-100 m-1 btn-info" onClick={() => 
                                         {

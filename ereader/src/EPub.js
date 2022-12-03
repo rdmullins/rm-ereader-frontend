@@ -13,12 +13,13 @@ function EPub(props) {
 
     const [bookMeta, setBookMeta] = useState([]);
 
-    let etext_id = props.featuredBookData?.book[0].gut_id;
-    console.log("Inside Epub, featured book id is ", etext_id);
+    // let etext_id = props.featuredBookData?.book[0].gut_id;
+    // console.log("Inside Epub, featured book id is ", etext_id);
 
     useEffect(() => {
-        let endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us77.gitpod.io/books/bookmetadata/78`
+        let endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us77.gitpod.io/books/bookmetadatalookup/84`
         console.log("Inside ePub, endpoint is ", endpoint);
+        console.log("eTextId is ", props.eTextId);
         axios.get(endpoint)
           .then((response)=> setBookMeta(response.data))
       },[]);
@@ -56,15 +57,15 @@ function EPub(props) {
       //   />
       // </div>
         <>
-            <div className="container border">
+            <div className="container border overflow-auto">
                 <div className="row">
                     <div className="col">
                         <pre>
-                            <div dangerouslySetInnerHTML={{__html: bookMeta[0]?.fulltext}}></div>
+                            <div dangerouslySetInnerHTML={{__html: bookMeta?.fulltext}}></div>
                         </pre>
                     </div>
                 </div>
-            </div>>
+            </div>
         </>
     )
     
