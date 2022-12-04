@@ -58,6 +58,19 @@ function FeaturedBook(props) {
 
     if(props.featuredBookData){
         if(props.featuredBookData?.book){
+
+            // let copyOfAudioBookData = { ...props.audioBookData };
+
+            // copyOfAudioBookData = {
+            //     audioBookTitle: props.featuredBookData.book[0].title,
+            //     audioBookAuthor: 
+            //         `${props.featuredBookData?.author[0].first_name} &nbsp ${props.featuredBookData?.author[0].last_name} &nbsp (${props.featuredBookData?.author[0].dob}-${props.featuredBookData?.author[0].dod})`,
+            //     audioBookFile: "ereader/src/audiobooks/frankenstein_00_shelley_64kb.mp3",
+            //     audioBookCoverImage: "https://www.gutenberg.org/cache/epub/84/pg84.cover.medium.jpg"
+            // };
+
+            // props.setAudioBookData(copyOfAudioBookData);
+
             return ( 
                 <>
                     <div className="container">
@@ -94,7 +107,7 @@ function FeaturedBook(props) {
                                             </div>
                                             <div className="col-3">
                                                 <button type="button" className="btn w-100 m-1 btn-info" onClick={() => props.setView("EPub")}>Read Now</button>
-                                                <button type="button" className="btn w-100 m-1 btn-info">Listen Now</button>
+                                                <button type="button" className="btn w-100 m-1 btn-info" onClick={() => props.setView("audio")}>Listen Now</button>
                                                 <button type="button" className="btn w-100 m-1 btn-info" onClick={() => toggleFeaturedBookInfo()}>Info</button>
                                             </div>
                                         </div>
