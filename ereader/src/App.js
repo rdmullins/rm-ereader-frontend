@@ -33,6 +33,13 @@ function App() {
     const [searchResultBook, setSearchResultBook] = useState([]);
     const [etextId, setEtextId] = useState(0);
 
+    const [audioBookData, setAudioBookData] = useState( {
+      audioBookTitle: "",
+      audioBookAuthor: "",
+      audioBookFile: "",
+      audioBookCoverImage: ""
+    });
+
     const firebaseConfig = {
       apiKey: "AIzaSyCHV95x4hl07pZdXsvAdHGp8Ce2k7dXmoY",
       authDomain: "rm-ereader.firebaseapp.com",
@@ -43,8 +50,8 @@ function App() {
       measurementId: "G-S1DVNPNNLY"
     };
 
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+    // const app = initializeApp(firebaseConfig);
+    // const db = getFirestore(app);
 
      // Pull a random book for the featured box on the front page
 
@@ -70,6 +77,7 @@ function App() {
       .then((response)=> setSearchResultBook(response.data))
       .then(console.log("Search result endpoint change detected. Inside App UseEffect for search results - book ID is", searchResultBook))
       .then(console.log("The search URL was ", searchResultEndpoint));
+//    },[]);
     },[searchResultEndpoint]);
 
 
@@ -83,6 +91,7 @@ function App() {
           .then(console.log("Search Endpoint change detected."))
           .then(setSearchResultEndpoint(`https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us77.gitpod.io/books/author_book/${bookData.bookId}/`))
       }
+//    },[]);
     },[searchEndpoint]);
 
     //};
@@ -134,10 +143,13 @@ function App() {
               <hr></hr>
               <FeaturedBook
                 featuredBookData = {featuredBookData}
-                setView = {setView} />
-              {/* <>
-                {featuredBookDisplay}
-              </> */}
+                setView = {setView} 
+                setAudioBookData = {setAudioBookData}
+                audioBookData = {audioBookData} 
+                />
+              <>
+                {/* {featuredBookDisplay} */}
+              </> 
               {/* <BookCard 
                 featuredBookData = {featuredBookData} /> */}
               <Collections />
@@ -232,6 +244,20 @@ function App() {
               <Header setview = {setView}
                 darkMode = {darkMode} />
               <TestRSS />
+              <Footer
+                setView = {setView}
+                darkMode = {darkMode}
+                setDarkMode = {setDarkMode} />
+            </>
+            }
+
+            {(view === "audio") &&
+            <>
+              <Header
+                setView = {setView}
+                darkMode = {darkMode} />
+              <Audio 
+                audioBookData = {audioBookData} />
               <Footer
                 setView = {setView}
                 darkMode = {darkMode}
