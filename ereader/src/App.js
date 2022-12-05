@@ -1,6 +1,6 @@
 // Imports go Here
 import React, { useState, useEffect } from "react";
-import {initializeApp} from 'firebase/app';
+import {FirebaseError, initializeApp} from 'firebase/app';
 import {getFirestore, collection, getDocs} from 'firebase/firestore/lite';
 // import { ReactDOM } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -18,6 +18,7 @@ import EPub from "./EPub";
 import EPub2 from "./EPub2";
 import TestRSS from "./TestRSS";
 import "./App.css";
+//import { getStorage, getRef, getDownloadUrl } from Firebase.storage
 
 
 function App() {
@@ -40,23 +41,6 @@ function App() {
       audioBookCoverImage: ""
     });
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyCHV95x4hl07pZdXsvAdHGp8Ce2k7dXmoY",
-      authDomain: "rm-ereader.firebaseapp.com",
-      projectId: "rm-ereader",
-      storageBucket: "rm-ereader.appspot.com",
-      messagingSenderId: "608792239689",
-      appId: "1:608792239689:web:86b5ce51b7c5e7a4b2e998",
-      measurementId: "G-S1DVNPNNLY"
-    };
-
-    // const app = initializeApp(firebaseConfig);
-    // const db = getFirestore(app);
-
-     // Pull a random book for the featured box on the front page
-
-    let bookId = Math.floor((Math.random()*5)+2)
-
     function handleDemoClick() {
       setView("EPub2");
     }
@@ -65,12 +49,22 @@ function App() {
       setView("RSS");
     }
 
+    // Pulls random book to feature on the main page
+
+    let bookId = Math.floor((Math.random()*5)+2)
+    console.log("Random book ID = ", bookId);
+
     useEffect(() => {
-      let endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us77.gitpod.io/books/author_book/${bookId}/`
+      let endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us77.gitpod.io/books/bookbyid/?search=${bookId}/`
       axios.get(endpoint)
+        .then(console.log("Featured Book URL: ", endpoint))
         .then((response)=> setFeaturedBookData(response.data))
-        .then(console.log("Featured Book: ", featuredBookData));
+        // .then(console.log("Featured Book: ", featuredBookData));
     },[]);
+
+    console.log("Featured Book: ", featuredBookData);
+
+    // Builds the URL for Search API Call
 
     useEffect(() => {
       axios.get(searchResultEndpoint)
@@ -81,7 +75,7 @@ function App() {
     },[searchResultEndpoint]);
 
 
-    // TEST Pulls All Books for Search Screen
+    // Search API Call - Pulls All Books for Search Screen if Blank
 
     useEffect(() => {
       if (searchEndpoint !== "") {

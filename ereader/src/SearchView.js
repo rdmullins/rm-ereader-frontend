@@ -20,6 +20,8 @@ function SearchView(props) {
         ) 
     }
 
+    console.log("Book Data in Search View:", bookData);
+
     const searchList = bookData.map(book => (
         <>
         <div className="container">
@@ -33,18 +35,18 @@ function SearchView(props) {
                                 </div>
                                 <div className="col-6">
                                     <h5><em>{book.title}</em></h5>
-                                    {/* <p>
+                                    <p>
                                         <strong>
-                                            {book.author && book.author[0].first_name} &nbsp;
-                                            {book.author && book.author[0].last_name} &nbsp;   
+                                            {book.authors && book.authors[0].first_name} &nbsp;
+                                            {book.authors && book.authors[0].last_name} &nbsp;   
                                         </strong>
-                                            {book.author_role && book.author_role[0].role}
+                                            {/* {book.author_role && book.author_role[0].role} */}
                                         (
-                                            {book.author && book.author[0].dob}
+                                            {book.authors && book.authors[0].dob}
                                             -
-                                            {book.author && book.author[0].dod}
+                                            {book.authors && book.authors[0].dod}
                                         )
-                                    </p> */}
+                                    </p>
                                 </div>
                                 <div className="col-3">
                                     <button type="button" className="btn w-100 m-1 btn-info" onClick={() => 
