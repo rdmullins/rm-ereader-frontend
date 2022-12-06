@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 //import "./styles.css";
 import { ReactReader, ReactReaderStyle } from "react-reader";
+import { getStorage, ref, getBlob, getDownloadURL } from "firebase/storage";
 //import Ebook from "./epub/sample.epub";
 
 const ownStyles = {
@@ -15,6 +16,30 @@ const ownStyles = {
 const loc = null;
 
 export default function EPub2() {
+
+  const [ePubURL, setEPubURL] = useState("");
+
+  const storage = getStorage();
+  const ePubRef = ref(storage, 'https://firebasestorage.googleapis.com/v0/b/rm-ereader.appspot.com/o/pg76.epub?alt=media&token=494468c0-2142-4022-8a03-d3bb83779d0e');
+
+  // const epub = getBlob(storage, ePubRef);
+
+  // console.log(epub);
+
+  // let ePubURL = "";
+
+  // getDownloadURL(storage, ePubRef) {
+  //   .then((url) => {
+  //     const xhr = new XMLHttpRequest();
+  //     xhr.responseType = "blob";
+  //     xhr.onload = (event) => {
+  //       const blob = xhr.response;
+  //     };
+  //     xhr.open("GET", url);
+  //     xhr.send();
+  //   });
+  // }
+
   const [selections, setSelections] = useState([]);
   const renditionRef = useRef(null);
 
@@ -61,14 +86,24 @@ export default function EPub2() {
       };
     }
   }, [setSelections, selections]);
+
+
+  getDownloadURL(ePubRef)
+    .then((url) => {
+     (setEPubURL(url));
+    })
+    .catch((error) => {})
+  
   return (
     <>
       <div className="container" style={{ position: "relative", height: "100vh" }}>
         <ReactReader
           location={location}
           locationChanged={locationChanged}
-          // url={"https://gerhardsletten.github.io/react-reader/files/alice.epub"}
-          url = {"https://drive.google.com/uc?id=1bR-kxc_m4boe69fYKVGtLPhiD-ElAiG4/view?usp=sharing"}
+          //url={"https://gerhardsletten.github.io/react-reader/files/alice.epub"}
+          //url = {"https://drive.google.com/uc?id=1bR-kxc_m4boe69fYKVGtLPhiD-ElAiG4/view?usp=sharing"}
+
+          url={ePubURL}
           styles={ownStyles}
           getRendition={(rendition) => {
             renditionRef.current = rendition;

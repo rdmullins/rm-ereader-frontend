@@ -3,61 +3,17 @@ import { XCircleFill } from "react-bootstrap-icons";
 
 function FeaturedBook(props) {
 
-    // let featuredBookCard = props.featuredBookData[0].map(book =>
-
-    //     )
-
-    // const {featuredBookData = {}} = props;
-
-    // const {
-    //     id: 0;
-    //     author: {
-    //         id: 0;
-    //         first_name: "";
-    //         last_name: "";
-    //         dob: "";
-    //         dod: "";
-    //     };
-    //     book: {
-    //         id: 0;
-    //         gut_type: {
-    //             id: 0;
-    //             type: "";
-    //         };
-    //         gut_id: 0;
-    //         title: "";
-    //         lib_id: 0;
-    //         gut_issued: 2022/01/01;
-    //         description: "";
-    //     };
-    //     author_role: {
-    //         id: 0;
-    //         role: "";
-    //     };
-    // } = featuredBookData;
-    // if(props.featuredBookData){
-    //     if(props.featuredBookData?.book){
-    //         console.log(props.featuredBookData?.book[0].title);
-    //         console.log(props.featuredBookData?.book[0].description);
-    //         console.log(props.featuredBookData?.book[0].gut_id);
-    //     }
-    //     if (props.featuredBookData?.author){
-    //         console.log(props.featuredBookData?.author[0].last_name);
-    //         console.log(props.featuredBookData?.author[0].first_name);
-    //         console.log(props.featuredBookData?.author[0].dob);
-    //         console.log(props.featuredBookData?.author[0].dod);
-    //     }
-    // }
-
     const [featuredBookInfo, setFeaturedBookInfo] = useState(false);
+
+    // console.log("Inside Featured Book component. FeaturedBookData is ", props.featuredBookData);
 
 
     function toggleFeaturedBookInfo() {
         setFeaturedBookInfo(!featuredBookInfo);
     }
 
-    if(props.featuredBookData){
-        if(props.featuredBookData?.book){
+    if(props.featuredBookData?.[0].title){
+        if(props.featuredBookData){
 
             // let copyOfAudioBookData = { ...props.audioBookData };
 
@@ -88,20 +44,20 @@ function FeaturedBook(props) {
                                     <div className="card-body">
                                         <div className="row">
                                             <div className="col-3">
-                                                <img src={`https://www.gutenberg.org/cache/epub/${props.featuredBookData?.book[0].gut_id}/pg${props.featuredBookData?.book[0].gut_id}.cover.medium.jpg`} className="img-fluid border" alt="Book Cover"></img>
+                                                <img src={`https://www.gutenberg.org/cache/epub/${props.featuredBookData?.[0].gut_id}/pg${props.featuredBookData?.[0].gut_id}.cover.medium.jpg`} className="img-fluid border" alt="Book Cover"></img>
                                             </div>
                                             <div className="col-6">
-                                                <h4><em>{props.featuredBookData?.book[0].title}</em></h4>
+                                                <h4><em>{props.featuredBookData?.[0].title}</em></h4>
                                                 <p>
                                                     <strong>
-                                                        {props.featuredBookData?.author[0].first_name} &nbsp;
-                                                        {props.featuredBookData?.author[0].last_name} &nbsp;
+                                                        {props.featuredBookData?.[0].authors[0].first_name} &nbsp;
+                                                        {props.featuredBookData?.[0].authors[0].last_name} &nbsp;
                                                     </strong>
                                                         {/* , {props.featuredBookData?.author_role[0].role} */}
                                                     (
-                                                        {props.featuredBookData?.author[0].dob}
+                                                        {props.featuredBookData?.[0].authors[0].dob}
                                                         -
-                                                        {props.featuredBookData?.author[0].dod}
+                                                        {props.featuredBookData?.[0].authors[0].dod}
                                                     )                                                       
                                                 </p>
                                             </div>
@@ -125,8 +81,8 @@ function FeaturedBook(props) {
                         <div className="modal">
                         <div onClick={toggleFeaturedBookInfo} className="overlay"></div>
                         <div className="modal-content">
-                            <h2>{props.featuredBookData?.book[0].title}</h2>
-                            <div dangerouslySetInnerHTML={{__html: props.featuredBookData?.book[0].description}}></div>
+                            <h2>{props.featuredBookData?.[0].title}</h2>
+                            <div dangerouslySetInnerHTML={{__html: props.featuredBookData?.[0].description}}></div>
                             <p>
                                 <button type="button" className="btn w-100 m-1 btn-info">Read Now</button>
                                 <button type="button" className="btn w-100 m-1 btn-info">Listen Now</button>

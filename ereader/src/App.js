@@ -1,9 +1,11 @@
 // Imports go Here
 import React, { useState, useEffect } from "react";
 import {FirebaseError, initializeApp} from 'firebase/app';
+//import { initializeApp } from "firebase/app";
 import {getFirestore, collection, getDocs} from 'firebase/firestore/lite';
 // import { ReactDOM } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import APIBaseURL from "./BaseURL";
 import axios from "axios";
 import Header from "./Header";
 import Search from "./Search";
@@ -18,12 +20,17 @@ import EPub from "./EPub";
 import EPub2 from "./EPub2";
 import TestRSS from "./TestRSS";
 import "./App.css";
+import { GlobeCentralSouthAsia } from "react-bootstrap-icons";
 //import { getStorage, getRef, getDownloadUrl } from Firebase.storage
 
 
 function App() {
-    console.log("Started App")
-    const [featuredBookData, setFeaturedBookData] = useState([]);
+    console.log("Started App");
+
+    initializeApp("Firebase.js");
+    
+
+    const [featuredBookData, setFeaturedBookData] = useState(["Initial State"]);
     const [bookData, setBookData] = useState([]);
     const [view, setView] = useState("home");
     const [searchTerm, setSearchTerm] = useState("");
@@ -33,6 +40,9 @@ function App() {
     const [searchResultEndpoint, setSearchResultEndpoint] = useState(""); 
     const [searchResultBook, setSearchResultBook] = useState([]);
     const [etextId, setEtextId] = useState(0);
+    const [collectionsList, setCollectionsList] = useState([]);
+    const [collectionBooks, setCollectionBooks] = useState([]);
+
 
     const [audioBookData, setAudioBookData] = useState( {
       audioBookTitle: "",
@@ -51,26 +61,25 @@ function App() {
 
     // Pulls random book to feature on the main page
 
-    let bookId = Math.floor((Math.random()*5)+2)
-    console.log("Random book ID = ", bookId);
+    let bookId = Math.floor((Math.random()*5))
+    // console.log("Random book ID = ", bookId);
 
     useEffect(() => {
-      let endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us77.gitpod.io/books/bookbyid/?search=${bookId}/`
+      let endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us77.gitpod.io/books/bookbyid/?search=${bookId}`
       axios.get(endpoint)
-        .then(console.log("Featured Book URL: ", endpoint))
-        .then((response)=> setFeaturedBookData(response.data))
-        // .then(console.log("Featured Book: ", featuredBookData));
+      .then((response)=> setFeaturedBookData(response.data))
     },[]);
 
-    console.log("Featured Book: ", featuredBookData);
+
+    // console.log("Featured Book: ", featuredBookData);
 
     // Builds the URL for Search API Call
 
     useEffect(() => {
       axios.get(searchResultEndpoint)
       .then((response)=> setSearchResultBook(response.data))
-      .then(console.log("Search result endpoint change detected. Inside App UseEffect for search results - book ID is", searchResultBook))
-      .then(console.log("The search URL was ", searchResultEndpoint));
+      // .then(console.log("Search result endpoint change detected. Inside App UseEffect for search results - book ID is", searchResultBook))
+      // .then(console.log("The search URL was ", searchResultEndpoint));
 //    },[]);
     },[searchResultEndpoint]);
 
@@ -82,36 +91,21 @@ function App() {
         let endpoint = searchEndpoint
         axios.get(endpoint)
           .then((response)=> setBookData(response.data))
-          .then(console.log("Search Endpoint change detected."))
+          // .then(console.log("Search Endpoint change detected."))
           .then(setSearchResultEndpoint(`https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us77.gitpod.io/books/author_book/${bookData.bookId}/`))
       }
 //    },[]);
     },[searchEndpoint]);
 
-    //};
-
-    // localStorage.setItem("featuredBook", featuredBookData);
-    
-    // featuredBookDisplay = featuredBookData;
-
-    // Pull a random featured book for the front page
-
-    //setFeaturedBookData(JSON.parse(localStorage.getItem("featuredBook")));
-
-    //console.log(featuredBookData);
-    //console.log("BOOKDATA FROM APP LEVEL:", bookData);
-    
-    //     //console.log("Inside App function.");
-    //     //const [post] = React.useState(null);
-        
-  
-    //     if (portfolioData.length === 0) return (
-    //       <div className="spinner-border text-primary text-center" role="status">
-    //         <span className="visually-hidden">Loading...</span>
-    //       </div>
-    //       );
-        
-    //     console.log(portfolioData);
+    useEffect(() => {
+        let endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us77.gitpod.io/books/collections/`
+        axios.get(endpoint)
+        .then((response)=> {
+          setCollectionsList(response.data)
+          return response.data
+        })
+        // .then((collectionsList) => console.log("Collections: ", collectionsList))
+    },[]);
 
         return (
 
@@ -139,14 +133,12 @@ function App() {
                 featuredBookData = {featuredBookData}
                 setView = {setView} 
                 setAudioBookData = {setAudioBookData}
-                audioBookData = {audioBookData} 
-                />
-              <>
-                {/* {featuredBookDisplay} */}
-              </> 
-              {/* <BookCard 
-                featuredBookData = {featuredBookData} /> */}
-              <Collections />
+                audioBookData = {audioBookData} />
+              <Collections
+                collectionBook = {collectionBooks}
+                setCollectionBooks = {setCollectionBooks}
+                collectionsList = {collectionsList}
+                setCollectionsList = {setCollectionsList} />
               <Categories />
               <hr></hr>
               <Footer 
@@ -250,8 +242,8 @@ function App() {
               <Header
                 setView = {setView}
                 darkMode = {darkMode} />
-              <Audio 
-                audioBookData = {audioBookData} />
+              {/* <Audio 
+                audioBookData = {audioBookData} /> */}
               <Footer
                 setView = {setView}
                 darkMode = {darkMode}
