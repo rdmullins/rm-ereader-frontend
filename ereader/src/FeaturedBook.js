@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { XCircleFill } from "react-bootstrap-icons";
+import React, { useRef, useEffect } from "react";
+import { getStorage, ref, getBlob, getDownloadURL } from "firebase/storage";
 
 function FeaturedBook(props) {
 
     const [featuredBookInfo, setFeaturedBookInfo] = useState(false);
-
-    // console.log("Inside Featured Book component. FeaturedBookData is ", props.featuredBookData);
+    
 
 
     function toggleFeaturedBookInfo() {
@@ -62,8 +63,19 @@ function FeaturedBook(props) {
                                                 </p>
                                             </div>
                                             <div className="col-3">
-                                                <button type="button" className="btn w-100 m-1 btn-info" onClick={() => props.setView("EPub")}>Read Now</button>
-                                                <button type="button" className="btn w-100 m-1 btn-info" onClick={() => props.setView("audio")}>Listen Now</button>
+                                                <button type="button" className="btn w-100 m-1 btn-info" 
+                                                    onClick={() => {
+                                                        props.setEtextId(props.featuredBookData?.[0].gut_id);
+                                                        props.setView("EPub2")}}
+                                                >
+                                                    Read Now
+                                                </button>
+                                                <button type="button" className="btn w-100 m-1 btn-info"
+                                                    onClick={() => {
+                                                        props.setAudioBookId(props.featuredBookData?.[0].gut_id);
+                                                        props.setView("audio");
+                                                    }}
+                                                >Listen Now</button>
                                                 <button type="button" className="btn w-100 m-1 btn-info" onClick={() => toggleFeaturedBookInfo()}>Info</button>
                                             </div>
                                         </div>
@@ -84,7 +96,12 @@ function FeaturedBook(props) {
                             <h2>{props.featuredBookData?.[0].title}</h2>
                             <div dangerouslySetInnerHTML={{__html: props.featuredBookData?.[0].description}}></div>
                             <p>
-                                <button type="button" className="btn w-100 m-1 btn-info">Read Now</button>
+                                <button type="button" className="btn w-100 m-1 btn-info" 
+                                    onClick={() => {
+                                        props.setEtextId(props.featuredBookData?.[0].gut_id);
+                                        props.setView("EPub2")}}
+                                >Read Now
+                                </button>
                                 <button type="button" className="btn w-100 m-1 btn-info">Listen Now</button>
                             </p>
                             <h2 className="close-modal" onClick={toggleFeaturedBookInfo}>

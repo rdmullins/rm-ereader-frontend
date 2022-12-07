@@ -5,6 +5,7 @@ import {FirebaseError, initializeApp} from 'firebase/app';
 import {getFirestore, collection, getDocs} from 'firebase/firestore/lite';
 // import { ReactDOM } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.min.js";
 import APIBaseURL from "./BaseURL";
 import axios from "axios";
 import Header from "./Header";
@@ -12,6 +13,8 @@ import Search from "./Search";
 import FeaturedBook from "./FeaturedBook";
 import BookCard from "./BookCard";
 import Collections from "./Collections";
+import CollectionsAccordion from "./CollectionsAccordion";
+import CollectionsDatalist from "./CollectionsDatalist";
 import Categories from "./Categories";
 import Footer from "./Footer";
 import MyBooks from "./MyBooks"
@@ -19,6 +22,7 @@ import SearchView from "./SearchView";
 import EPub from "./EPub";
 import EPub2 from "./EPub2";
 import TestRSS from "./TestRSS";
+import Audio from "./Audio";
 import "./App.css";
 import { GlobeCentralSouthAsia } from "react-bootstrap-icons";
 //import { getStorage, getRef, getDownloadUrl } from Firebase.storage
@@ -42,6 +46,10 @@ function App() {
     const [etextId, setEtextId] = useState(0);
     const [collectionsList, setCollectionsList] = useState([]);
     const [collectionBooks, setCollectionBooks] = useState([]);
+    const [collectionFilter, setCollectionFilter] = useState([]);
+    const [collectionsReturned, setCollectionsReturned] = useState([]);
+    const [audioBookId, setAudioBookId] = useState(0);
+    const [audioBookURL, setAudioBookURL] = useState(null)
 
 
     const [audioBookData, setAudioBookData] = useState( {
@@ -51,13 +59,13 @@ function App() {
       audioBookCoverImage: ""
     });
 
-    function handleDemoClick() {
-      setView("EPub2");
-    }
+    // function handleDemoClick() {
+    //   setView("EPub2");
+    // }
 
-    function handleRSSClick() {
-      setView("RSS");
-    }
+    // function handleRSSClick() {
+    //   setView("RSS");
+    // }
 
     // Pulls random book to feature on the main page
 
@@ -106,6 +114,19 @@ function App() {
         })
         // .then((collectionsList) => console.log("Collections: ", collectionsList))
     },[]);
+    
+    useEffect(() => {
+      let endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us77.gitpod.io/books/collectionsearch/?search=${collectionFilter}`
+      console.log("Collection search filter is ", collectionFilter);
+      axios.get(endpoint)
+      .then((response)=> {
+        setCollectionsReturned(response.data)
+        console.log("Collections Returned: ", collectionsReturned);
+        return response.data
+      })
+      // .then((collectionsList) => console.log("Collections: ", collectionsList))
+  },[collectionFilter]);
+
 
         return (
 
@@ -133,19 +154,38 @@ function App() {
                 featuredBookData = {featuredBookData}
                 setView = {setView} 
                 setAudioBookData = {setAudioBookData}
-                audioBookData = {audioBookData} />
+                audioBookData = {audioBookData} 
+                etextId = {etextId}
+                setEtextId = {setEtextId} 
+                audioBookId = {audioBookId}
+                setAudioBookId = {setAudioBookId}
+                audioBookURL = {audioBookURL}
+                setAudioBookURL = {setAudioBookURL} />
               <Collections
                 collectionBook = {collectionBooks}
                 setCollectionBooks = {setCollectionBooks}
                 collectionsList = {collectionsList}
-                setCollectionsList = {setCollectionsList} />
-              <Categories />
+                setCollectionsList = {setCollectionsList} 
+                collectionFilter = {collectionFilter}
+                setCollectionFilter = {setCollectionFilter}
+                collectionsReturned = {collectionsReturned}
+                setCollectionsReturned = {setCollectionsReturned}
+                setView = {setView} 
+                setEtextId = {setEtextId} 
+                audioBookId = {audioBookId}
+                setAudioBookId = {setAudioBookId} 
+                audioBookURL = {audioBookURL}
+                setAudioBookURL = {setAudioBookURL} />
+              <Categories 
+                setView = {setView} 
+                audioBookId = {audioBookId}
+                setAudioBookId = {setAudioBookId} />
               <hr></hr>
               <Footer 
                 setView = {setView} 
                 darkMode = {darkMode}
                 setDarkMode = {setDarkMode}/>
-              <button onClick={() => handleDemoClick()}>EPub Reader Demo</button>
+              {/* <button onClick={() => handleDemoClick()}>EPub Reader Demo</button> */}
               {/* <button onClick={() => handleRSSClick()}>RSS Reader Demo</button> */}
             </>
             }
@@ -179,7 +219,11 @@ function App() {
                 setSearchResultEndpoint = {setSearchResultEndpoint}
                 setSearchResultBook = {setSearchResultBook} 
                 etextId = {etextId}
-                setEtextId = {setEtextId} />
+                setEtextId = {setEtextId}
+                audioBookId = {audioBookId}
+                setAudioBookId = {setAudioBookId}
+                audioBookURL = {audioBookURL}
+                setAudioBookURL = {setAudioBookURL} />
               <hr></hr>
               <SearchView 
                 searchType = {searchType} 
@@ -188,7 +232,11 @@ function App() {
                 bookData = {bookData}
                 searchResultBook = {searchResultBook} 
                 etextId = {etextId}
-                setEtextId = {setEtextId} />
+                setEtextId = {setEtextId}
+                audioBookId = {audioBookId}
+                setAudioBookId = {setAudioBookId}
+                audioBookURL = {audioBookURL}
+                setAudioBookURL = {setAudioBookURL} />
               <hr></hr>
               <Footer 
                 setView = {setView}
@@ -217,7 +265,8 @@ function App() {
             <>
               <Header setView = {setView}
                 darkMode = {darkMode} />
-              <EPub2 />
+              <EPub2 
+                etextId = {etextId} />
               <Footer
                 setView = {setView}
                 darkMode = {darkMode}
@@ -242,8 +291,88 @@ function App() {
               <Header
                 setView = {setView}
                 darkMode = {darkMode} />
-              {/* <Audio 
-                audioBookData = {audioBookData} /> */}
+              <Audio 
+                audioBookId = {audioBookId}
+                audioBookURL = {audioBookURL}
+                setAudioBookURL = {setAudioBookURL} />
+              <Footer
+                setView = {setView}
+                darkMode = {darkMode}
+                setDarkMode = {setDarkMode} />
+            </>
+            }
+
+            {(view === "Fiction") &&
+            <>
+              <Header
+                setView = {setView}
+                darkMode = {darkMode} />
+              <h1>Fiction</h1>
+              <Footer
+                setView = {setView}
+                darkMode = {darkMode}
+                setDarkMode = {setDarkMode} />
+            </>
+            }
+
+            {(view === "Non-Fiction") &&
+            <>
+              <Header
+                setView = {setView}
+                darkMode = {darkMode} />
+              <h1>Non-Fiction</h1>
+              <Footer
+                setView = {setView}
+                darkMode = {darkMode}
+                setDarkMode = {setDarkMode} />
+            </>
+            }
+
+            {(view === "Poetry") &&
+            <>
+              <Header
+                setView = {setView}
+                darkMode = {darkMode} />
+              <h1>Poetry</h1>
+              <Footer
+                setView = {setView}
+                darkMode = {darkMode}
+                setDarkMode = {setDarkMode} />
+            </>
+            }
+
+            {(view === "Short Stories") &&
+            <>
+              <Header
+                setView = {setView}
+                darkMode = {darkMode} />
+              <h1>Short Stories</h1>
+              <Footer
+                setView = {setView}
+                darkMode = {darkMode}
+                setDarkMode = {setDarkMode} />
+            </>
+            }
+
+            {(view === "Classical") &&
+            <>
+              <Header
+                setView = {setView}
+                darkMode = {darkMode} />
+              <h1>Classical</h1>
+              <Footer
+                setView = {setView}
+                darkMode = {darkMode}
+                setDarkMode = {setDarkMode} />
+            </>
+            }
+
+            {(view === "Drama") &&
+            <>
+              <Header
+                setView = {setView}
+                darkMode = {darkMode} />
+              <h1>Drama</h1>
               <Footer
                 setView = {setView}
                 darkMode = {darkMode}
@@ -254,5 +383,6 @@ function App() {
           </div>
         );
       
-  };      
+  }; 
+       
 export default App;

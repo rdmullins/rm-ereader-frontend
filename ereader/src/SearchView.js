@@ -49,11 +49,11 @@ function SearchView(props) {
                                     </p>
                                 </div>
                                 <div className="col-3">
-                                    <button type="button" className="btn w-100 m-1 btn-info" onClick={() => 
-                                        {    
-                                        props.setEtextId(book.gut_id);
-                                        props.setView("EPub");}}>
-                                                Read Now
+                                    <button type="button" className="btn w-100 m-1 btn-info" 
+                                        onClick={() => {
+                                            props.setEtextId(book.gut_id);
+                                            props.setView("EPub2")}}
+                                        >Read Now
                                     </button>
                                     <button type="button" className="btn w-100 m-1 btn-info">Listen Now</button>
                                     <button type="button" className="btn w-100 m-1 btn-info" onClick={() => 
