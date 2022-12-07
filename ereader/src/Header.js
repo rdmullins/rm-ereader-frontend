@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Book, PersonPlus } from 'react-bootstrap-icons';
 import { XCircleFill } from 'react-bootstrap-icons';
-import { EnvelopeFill, Linkedin, Github } from 'react-bootstrap-icons';
+import { EnvelopeFill, Linkedin, Github, Twitter } from 'react-bootstrap-icons';
 //import { }
 import "./App.css";
 
@@ -124,13 +124,16 @@ function Header(props) {
                         </div>
                     </div>
                     <div className="row text-center">
-                        <div className="col-4">
+                        <div className="col-3">
                             <h1><a href="mailto:rogermullins.mba@gmail.com" target="blank"><EnvelopeFill></EnvelopeFill></a></h1>
                         </div>
-                        <div className="col-4">
+                        <div className="col-3">
+                            <h1><a href="https://www.twitter.com/roger_mba" target="blank"><Twitter></Twitter></a></h1>
+                        </div>
+                        <div className="col-3">
                             <h1><a href="https://www.linkedin.com/in/rdmullins" target="blank"><Linkedin></Linkedin></a></h1>
                         </div>
-                        <div className="col-4">
+                        <div className="col-3">
                             <h1><a href="https://www.github.com/rdmullins" target="blank"><Github></Github></a></h1>
                         </div>
                     </div>
