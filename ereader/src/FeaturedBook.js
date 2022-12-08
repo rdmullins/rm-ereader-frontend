@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { XCircleFill } from "react-bootstrap-icons";
-import React, { useRef, useEffect } from "react";
-import { getStorage, ref, getBlob, getDownloadURL } from "firebase/storage";
 
 function FeaturedBook(props) {
 

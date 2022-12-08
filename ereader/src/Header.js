@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Book, PersonPlus } from 'react-bootstrap-icons';
+import { Book } from 'react-bootstrap-icons';
 import { XCircleFill } from 'react-bootstrap-icons';
 import { EnvelopeFill, Linkedin, Github, Twitter } from 'react-bootstrap-icons';
 //import { }

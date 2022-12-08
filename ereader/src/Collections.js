@@ -51,48 +51,59 @@ function Collections(props) {
 
     buildCollectionsList();
 
-    function getCoverURLs(gutenberg_id) {
-        const storage = getStorage();
-        const coverRef = ref(storage, `gs://rm-ereader.appspot.com/pg${gutenberg_id}.cover.medium.jpg`);
-        console.log("Inside the getURLs function. Id is ", gutenberg_id);
-        return(`The URL is gonna be awesome`);
-    }
+    // function getCoverURLs(gutenberg_id) {
+    //     const storage = getStorage();
+    //     const coverRef = ref(storage, `gs://rm-ereader.appspot.com/pg${gutenberg_id}.cover.medium.jpg`);
+    //     console.log("Inside the getURLs function. Id is ", gutenberg_id);
+    //     return(`The URL is gonna be awesome`);
+    // }
 
 
     // MakeCoverList();
 
     coverScroll = props.collectionsReturned.map(cover => 
-        <li className="list-group-item p-1 m-2 border">
-        <div key={cover.id} className="col">
-            <img src={()=>getCoverURLs(cover.gut_id)} className="image-fluid border collection-cover" alt={cover.title}></img>
-            <p>
-                <a href="#"  
+
+        <>
+            <div className="card" key={cover.id}>
+                <img src={cover.cover_url} className="card-img-top img-fluid" alt="Book Cover"/>
+            <div className="card-body">
+                <h5 className="card-title">{cover.title}</h5>
+                <p className="card-text"> <a href="#"  
                     onClick={() => {
                         props.setEtextId(cover.gut_id);
                         props.setView("EPub2")}}
                     >Read Now
-                </a> | <a href="#">Listen</a><br/><a href="#" onClick={() => {setModalTitle(cover.title); setModalDesc(cover.description); toggleBookInfo();}}>Details</a>
+                </a> <br/> <a href="#">Listen</a><br/><a href="#" onClick={() => {setModalTitle(cover.title); setModalDesc(cover.description); toggleBookInfo();}}>Details</a>
             </p>
-        </div>
-        </li>
+            </div>
+            <div className="card-footer">
+                {props.collectionFilter}
+            </div>
+                {/* <a href="#" class="btn btn-primary">Go somewhere</a> */}
+            </div>
+            </>
     );
+
+
 
     // Make Filtered Book List
 
     filteredCollection = props.collectionsReturned.map(book =>
-        <li>{book.title}</li>
+        <li key={book.id}>{book.title}</li>
         )
 
     return (
         <>
-            <div className="container">
+            <div className="container d-flex overflow-scroll">
             <div className="row">
                 <div className="col-12 col-md-10 d-inline-block p-2 vh-25">
                     <div className="row text-center g-0 border">
                         {/* <div className="d-inline-block p-2 overflow-auto vh-25 list-group-horizontal">{coverScroll}</div> */}
-                        <ul className="list-group p-1">
+                        {/* <ul className="list-group p-1"> */}
+                        <div className="card-group p-1">
                             {coverScroll}
-                        </ul>
+                        {/* </ul> */}
+                        </div>
                     </div>
                 </div>
                 

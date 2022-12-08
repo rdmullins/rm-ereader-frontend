@@ -23,6 +23,7 @@ import EPub from "./EPub";
 import EPub2 from "./EPub2";
 import TestRSS from "./TestRSS";
 import Audio from "./Audio";
+import Cover from "./Cover";
 import "./App.css";
 import { GlobeCentralSouthAsia } from "react-bootstrap-icons";
 //import { getStorage, getRef, getDownloadUrl } from Firebase.storage
