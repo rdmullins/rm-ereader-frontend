@@ -1,11 +1,28 @@
 import { useState } from "react";
-import { XCircleFill } from "react-bootstrap-icons";
+import { XCircleFill, Book } from "react-bootstrap-icons";
 
 function FeaturedBook(props) {
 
     const [featuredBookInfo, setFeaturedBookInfo] = useState(false);
+
+    let onReadingList = false;
     
 
+    for (let i=0; i<props.readingList.length; i++) {
+        if (props.readingList[i].bookID === props.featuredBookData?.[0].gut_id) {
+            onReadingList = true; 
+        } else {
+            onReadingList = false;
+        }
+    }
+
+    
+
+    // if (props.readingList.contains("bookID", (props.featuredBookData?.[0].gut_id))) {
+    //     console.log("Book found!");
+    // } else {
+    //     console.log("Book not found. props.readingList.contains(bookid, ", props.featuredBookData?.[0].gut_id, ") was false.");
+    // }
 
     function toggleFeaturedBookInfo() {
         setFeaturedBookInfo(!featuredBookInfo);
@@ -59,6 +76,57 @@ function FeaturedBook(props) {
                                                         {props.featuredBookData?.[0].authors[0].dod}
                                                     )                                                       
                                                 </p>
+
+                                                {(onReadingList) && 
+                                                    <>
+                                                        <hr/>
+                                                        <h2>
+                                                            <Book /> 
+                                                            <span> On your reading list!</span>
+                                                        </h2>
+                                                        <button className="btn m-1 btn-info"
+                                                            onClick={() => {
+                                                                console.log("Remove Button Clicked.");
+                                                                let tempReadingList = [...props.readingList];
+
+                                                                for (let i=0; i<tempReadingList.length; i++) {
+                                                                    if (tempReadingList[i].bookID === props.featuredBookData?.[0].gut_id) {
+                                                                        tempReadingList[i].isActive = false; 
+                                                                    }
+                                                                };
+                                                                props.setReadingList(tempReadingList);
+                                                                localStorage.setItem("readingList", JSON.stringify(tempReadingList));  
+                                                                console.log("State version of reading list: ", props.readingList);
+                                                                console.log("LocalStorage version: ", localStorage.getItem("readingList"));                                                           
+                                                            }}
+                                                        >Remove From Reading List</button>
+                                                    </>
+                                                }
+
+                                                {(!onReadingList) && 
+                                                    <>
+                                                        <hr/>
+                                            
+                                                        <button className="btn m-1 btn-info"
+                                                            onClick={() => {
+                                                                console.log("Add Button Clicked.");
+                                                                let dateUpdated = Date.now();
+                                                                let tempReadingList = [
+                                                                    ...props.readingList, {
+                                                                      bookID: props.featuredBookData?.[0].gut_id,
+                                                                      isActive: true,
+                                                                      updated: dateUpdated
+                                                                    }
+                                                                  ];
+                                                                props.setReadingList(tempReadingList);
+                                                                localStorage.setItem("readingList", JSON.stringify(tempReadingList));  
+                                                                console.log("State version of reading list: ", props.readingList);
+                                                                console.log("LocalStorage version: ", localStorage.getItem("readingList"));                                                              
+                                                            }}
+                                                        >Add To Reading List</button>
+                                                    </>
+                                                }
+
                                             </div>
                                             <div className="col-3">
                                                 <button type="button" className="btn w-100 m-1 btn-info" 

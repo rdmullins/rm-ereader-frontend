@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { XCircleFill } from "react-bootstrap-icons";
+import { XCircleFill, Book } from "react-bootstrap-icons";
 
 function SearchView(props) {
 
@@ -12,6 +12,8 @@ function SearchView(props) {
         setBookInfo(!bookInfo);
     }
 
+
+
     if (!bookData && bookData.length < 1) {
         return (
             <div>
@@ -20,11 +22,27 @@ function SearchView(props) {
         ) 
     }
 
-    console.log("Book Data in Search View:", bookData);
+    let onReadingList = false;
 
     const searchList = bookData.map(book => (
+        // {
+
+        //         console.log("Book Data in Search View:", bookData);
+        //         for (let i=0; i<props.readingList.length; i++) {
+        //             for (let j=0; j<bookData.length; j++) {
+        //                 console.log("Checking reading list item ", i, " with an ID of ", props.readingList[i].bookID);
+        //                 console.log("Against bookData item ", j, " with an ID of ", props.bookData?.[j].gut_id);
+        //                 if (props.readingList[i].bookID === props.bookData?.[j].gut_id && props.readingList[i].isActive === true) {
+        //                     onReadingList = true; 
+        //                 } else {
+        //                     onReadingList = false;
+        //                 }
+        //             }
+        //         }
+        // })
+
         <>
-        <div className="container">
+        <div className="container" key={book.id}>
             <div className="row">
                 <div className="card mb-3 col-12">
                     <div className="row">
@@ -47,6 +65,57 @@ function SearchView(props) {
                                             {book.authors && book.authors[0].dod}
                                         )
                                     </p>
+
+                                    {(onReadingList) && 
+                                        <>
+                                            <hr/>
+                                            <h2>
+                                                <Book /> 
+                                                <span> On your reading list!</span>
+                                            </h2>
+                                            <button className="btn m-1 btn-info"
+                                                onClick={() => {
+                                                    console.log("Remove Button Clicked.");
+                                                    let tempReadingList = [...props.readingList];
+
+                                                    for (let i=0; i<tempReadingList.length; i++) {
+                                                        if (tempReadingList[i].bookID === book.gut_id) {
+                                                            tempReadingList[i].isActive = false; 
+                                                        }
+                                                    };
+                                                    props.setReadingList(tempReadingList);
+                                                    localStorage.setItem("readingList", JSON.stringify(tempReadingList));  
+                                                    console.log("State version of reading list: ", props.readingList);
+                                                    console.log("LocalStorage version: ", localStorage.getItem("readingList"));                                                           
+                                                }}
+                                            >Remove From Reading List</button>
+                                        </>
+                                    }
+
+                                    {(!onReadingList) && 
+                                        <>
+                                            <hr/>
+                                
+                                            <button className="btn m-1 btn-info"
+                                                onClick={() => {
+                                                    console.log("Add Button Clicked.");
+                                                    let dateUpdated = Date.now();
+                                                    let tempReadingList = [
+                                                        ...props.readingList, {
+                                                            bookID: book.gut_id,
+                                                            isActive: true,
+                                                            updated: dateUpdated
+                                                        }
+                                                        ];
+                                                    props.setReadingList(tempReadingList);
+                                                    localStorage.setItem("readingList", JSON.stringify(tempReadingList));  
+                                                    console.log("State version of reading list: ", props.readingList);
+                                                    console.log("LocalStorage version: ", localStorage.getItem("readingList"));                                                              
+                                                }}
+                                            >Add To Reading List</button>
+                                        </>
+                                    }
+
                                 </div>
                                 <div className="col-3">
                                     <button type="button" className="btn w-100 m-1 btn-info" 

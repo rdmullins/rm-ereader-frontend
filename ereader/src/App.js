@@ -51,6 +51,7 @@ function App() {
     const [collectionsReturned, setCollectionsReturned] = useState([]);
     const [audioBookId, setAudioBookId] = useState(0);
     const [audioBookURL, setAudioBookURL] = useState(null)
+    const [myBookSearch, setMyBookSearch] = useState("");
 
 
     const [audioBookData, setAudioBookData] = useState( {
@@ -59,6 +60,38 @@ function App() {
       audioBookFile: "",
       audioBookCoverImage: ""
     });
+
+    // Check localStorage for Reading List; if not found, CREATE
+
+    if (localStorage.getItem("readingList") === null) {
+      localStorage.setItem("readingList", JSON.stringify([
+        {
+          bookID: 0,
+          isActive: false,
+          updated: 0
+        }
+      ]))
+    };
+
+    // READ readingList from localStorage into state
+
+    const [readingList, setReadingList] = useState(JSON.parse(localStorage.getItem(("readingList"))));
+
+    function populateLocalStorage() {
+      let dateUpdated = Date.now();
+
+      let updatedReadingList = [
+        ...readingList, {
+          bookID: 84,
+          isActive: true,
+          updated: dateUpdated
+        }
+      ];
+
+      setReadingList(updatedReadingList);
+
+      localStorage.setItem("readingList", JSON.stringify(updatedReadingList));
+    }
 
     // function handleDemoClick() {
     //   setView("EPub2");
@@ -72,6 +105,8 @@ function App() {
 
     let bookId = Math.floor((Math.random()*5))
     // console.log("Random book ID = ", bookId);
+
+    console.log("ReadingList = ", readingList);
 
     useEffect(() => {
       let endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us78.gitpod.io/books/bookbyid/?search=${bookId}`
@@ -105,6 +140,18 @@ function App() {
       }
 //    },[]);
     },[searchEndpoint]);
+
+    useEffect(() => {
+      console.log("Inside myBook useEffect. Search endpoint is ", myBookSearch);
+      if (myBookSearch !== "") {
+        let endpoint = myBookSearch
+        axios.get(endpoint)
+          .then((response)=> setBookData(response.data))
+          // .then(console.log("Search Endpoint change detected."))
+          //.then(setMyBookSearch(`https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us78.gitpod.io/books/bookbyid/?search=${bookData.bookId}/`))
+      }
+//    },[]);
+    },[myBookSearch]);
 
     useEffect(() => {
         let endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us78.gitpod.io/books/collections/`
@@ -149,7 +196,9 @@ function App() {
                 setSearchResultEndpoint = {setSearchResultEndpoint}
                 setSearchResultBook = {setSearchResultBook}
                 etextId = {etextId}
-                setEtextId = {setEtextId} />
+                setEtextId = {setEtextId}
+                readingList = {readingList}
+                setReadingList = {setReadingList} />
               <hr></hr>
               <FeaturedBook
                 featuredBookData = {featuredBookData}
@@ -161,7 +210,9 @@ function App() {
                 audioBookId = {audioBookId}
                 setAudioBookId = {setAudioBookId}
                 audioBookURL = {audioBookURL}
-                setAudioBookURL = {setAudioBookURL} />
+                setAudioBookURL = {setAudioBookURL}
+                readingList = {readingList}
+                setReadingList = {setReadingList} />
               <Collections
                 collectionBook = {collectionBooks}
                 setCollectionBooks = {setCollectionBooks}
@@ -176,16 +227,22 @@ function App() {
                 audioBookId = {audioBookId}
                 setAudioBookId = {setAudioBookId} 
                 audioBookURL = {audioBookURL}
-                setAudioBookURL = {setAudioBookURL} />
+                setAudioBookURL = {setAudioBookURL}
+                readingList = {readingList}
+                setReadingList = {setReadingList} />
               <Categories 
                 setView = {setView} 
                 audioBookId = {audioBookId}
-                setAudioBookId = {setAudioBookId} />
+                setAudioBookId = {setAudioBookId}
+                readingList = {readingList}
+                setReadingList = {setReadingList} />
               <hr></hr>
               <Footer 
                 setView = {setView} 
                 darkMode = {darkMode}
-                setDarkMode = {setDarkMode}/>
+                setDarkMode = {setDarkMode}
+                readingList = {readingList}
+                setReadingList = {setReadingList} />
               {/* <button onClick={() => handleDemoClick()}>EPub Reader Demo</button> */}
               {/* <button onClick={() => handleRSSClick()}>RSS Reader Demo</button> */}
             </>
@@ -196,12 +253,23 @@ function App() {
               <Header 
                 setView = {setView}
                 darkMode = {darkMode} />
-              <MyBooks />
+              <MyBooks 
+                readingList = {readingList}
+                setReadingList = {setReadingList}
+                bookData = {bookData}
+                searchResultBook = {searchResultBook}
+                setSearchResultBook = {setSearchResultBook}
+                searchEndpoint = {searchEndpoint}
+                setSearchEndpoint = {setSearchEndpoint} 
+                myBookSearch = {myBookSearch}
+                setMyBookSearch = {setMyBookSearch} />
               <hr></hr>
               <Footer 
                 setView = {setView}
                 darkMode = {darkMode}
-                setDarkMode = {setDarkMode}/>
+                setDarkMode = {setDarkMode}
+                readingList = {readingList}
+                setReadingList = {setReadingList}/>
             </>
             }
 
@@ -224,7 +292,9 @@ function App() {
                 audioBookId = {audioBookId}
                 setAudioBookId = {setAudioBookId}
                 audioBookURL = {audioBookURL}
-                setAudioBookURL = {setAudioBookURL} />
+                setAudioBookURL = {setAudioBookURL} 
+                readingList = {readingList}
+                setReadingList = {setReadingList}/>
               <hr></hr>
               <SearchView 
                 searchType = {searchType} 
@@ -237,12 +307,16 @@ function App() {
                 audioBookId = {audioBookId}
                 setAudioBookId = {setAudioBookId}
                 audioBookURL = {audioBookURL}
-                setAudioBookURL = {setAudioBookURL} />
+                setAudioBookURL = {setAudioBookURL}
+                readingList = {readingList}
+                setReadingList = {setReadingList} />
               <hr></hr>
               <Footer 
                 setView = {setView}
                 darkMode = {darkMode}
-                setDarkMode = {setDarkMode}/>
+                setDarkMode = {setDarkMode}
+                readingList = {readingList}
+                setReadingList = {setReadingList}/>
             </>
             }
 
@@ -254,11 +328,15 @@ function App() {
                 featuredBookData = {featuredBookData}
                 bookData = {bookData} 
                 etextId = {etextId}
-                setEtextId = {setEtextId} />
+                setEtextId = {setEtextId} 
+                readingList = {readingList}
+                setReadingList = {setReadingList}/>
               <Footer 
                 setView = {setView}
                 darkMode = {darkMode}
-                setDarkMode = {setDarkMode}/>
+                setDarkMode = {setDarkMode}
+                readingList = {readingList}
+                setReadingList = {setReadingList}/>
             </>
             }
 
@@ -267,11 +345,15 @@ function App() {
               <Header setView = {setView}
                 darkMode = {darkMode} />
               <EPub2 
-                etextId = {etextId} />
+                etextId = {etextId} 
+                readingList = {readingList}
+                setReadingList = {setReadingList}/>
               <Footer
                 setView = {setView}
                 darkMode = {darkMode}
-                setDarkMode = {setDarkMode} />
+                setDarkMode = {setDarkMode}
+                readingList = {readingList}
+                setReadingList = {setReadingList} />
             </>
             }
 
@@ -283,7 +365,9 @@ function App() {
               <Footer
                 setView = {setView}
                 darkMode = {darkMode}
-                setDarkMode = {setDarkMode} />
+                setDarkMode = {setDarkMode}
+                readingList = {readingList}
+                setReadingList = {setReadingList} />
             </>
             }
 
@@ -295,11 +379,15 @@ function App() {
               <Audio 
                 audioBookId = {audioBookId}
                 audioBookURL = {audioBookURL}
-                setAudioBookURL = {setAudioBookURL} />
+                setAudioBookURL = {setAudioBookURL}
+                readingList = {readingList}
+                setReadingList = {setReadingList} />
               <Footer
                 setView = {setView}
                 darkMode = {darkMode}
-                setDarkMode = {setDarkMode} />
+                setDarkMode = {setDarkMode} 
+                readingList = {readingList}
+                setReadingList = {setReadingList}/>
             </>
             }
 
@@ -312,7 +400,9 @@ function App() {
               <Footer
                 setView = {setView}
                 darkMode = {darkMode}
-                setDarkMode = {setDarkMode} />
+                setDarkMode = {setDarkMode}
+                readingList = {readingList}
+                setReadingList = {setReadingList} />
             </>
             }
 
@@ -325,7 +415,9 @@ function App() {
               <Footer
                 setView = {setView}
                 darkMode = {darkMode}
-                setDarkMode = {setDarkMode} />
+                setDarkMode = {setDarkMode}
+                readingList = {readingList}
+                setReadingList = {setReadingList} />
             </>
             }
 
@@ -338,7 +430,9 @@ function App() {
               <Footer
                 setView = {setView}
                 darkMode = {darkMode}
-                setDarkMode = {setDarkMode} />
+                setDarkMode = {setDarkMode}
+                readingList = {readingList}
+                setReadingList = {setReadingList} />
             </>
             }
 
@@ -351,7 +445,9 @@ function App() {
               <Footer
                 setView = {setView}
                 darkMode = {darkMode}
-                setDarkMode = {setDarkMode} />
+                setDarkMode = {setDarkMode} 
+                readingList = {readingList}
+                setReadingList = {setReadingList}/>
             </>
             }
 
@@ -364,7 +460,9 @@ function App() {
               <Footer
                 setView = {setView}
                 darkMode = {darkMode}
-                setDarkMode = {setDarkMode} />
+                setDarkMode = {setDarkMode}
+                readingList = {readingList}
+                setReadingList = {setReadingList} />
             </>
             }
 
@@ -377,10 +475,12 @@ function App() {
               <Footer
                 setView = {setView}
                 darkMode = {darkMode}
-                setDarkMode = {setDarkMode} />
+                setDarkMode = {setDarkMode}
+                readingList = {readingList}
+                setReadingList = {setReadingList} />
             </>
             }
-<button onClick={()=>setView("RSS")}>RSS Test</button>
+<button onClick={() => populateLocalStorage()}>Populate LocalStorage</button>
           </div>
           
         );
