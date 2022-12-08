@@ -48,7 +48,9 @@ function Audio(props) {
           autoPlay
           src={props.audioBookURL}
           onPlay={e => console.log("onPlay")}
-          // other props here
+          showSkipControls={true}
+          progressJumpStep={15000}
+          progressJumpSteps={ {backward: 15000, forward: 15000} }
         />
       );
 
@@ -74,6 +76,8 @@ function Audio(props) {
                 src={props.audioBookURL}
                 onPlay={e => console.log("onPlay")}
                 // other props here
+                progressJumpStep={15000}
+                progressJumpSteps={ {backward: 15000, forward: 15000} }
               />
               </div>
             </div>

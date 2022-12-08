@@ -63,7 +63,7 @@ function Collections(props) {
 
     coverScroll = props.collectionsReturned.map(cover => 
 
-        <>
+        <div className="col-3">
             <div className="card" key={cover.id}>
                 <img src={cover.cover_url} className="card-img-top img-fluid" alt="Book Cover"/>
             <div className="card-body">
@@ -81,7 +81,7 @@ function Collections(props) {
             </div>
                 {/* <a href="#" class="btn btn-primary">Go somewhere</a> */}
             </div>
-            </>
+            </div>
     );
 
 
@@ -100,7 +100,7 @@ function Collections(props) {
                     <div className="row text-center g-0 border">
                         {/* <div className="d-inline-block p-2 overflow-auto vh-25 list-group-horizontal">{coverScroll}</div> */}
                         {/* <ul className="list-group p-1"> */}
-                        <div className="card-group p-1 overflow-scroll">
+                        <div className="scrolling-wrapper card-group p-1 flex-nowrap flex-row overflow-scroll">
                             {coverScroll}
                         {/* </ul> */}
                         </div>
@@ -132,14 +132,14 @@ function Collections(props) {
                     <p>
                         <button type="button" className="btn w-100 m-1 btn-info" 
                             onClick={() => {
-                                props.setEtextId(props.featuredBookData?.[0].gut_id);
+                                // props.setEtextId(book.gut_id);
                                 props.setView("EPub2");
                             }}
                         >Read Now
                         </button>
                         <button type="button" className="btn w-100 m-1 btn-info"
                             onClick={() => {
-                                props.setAudioBookId(props.featuredBookData?.[0].gut_id);
+                                // props.setAudioBookId(book.gut_id);
                                 props.setView("audio");
                             }}
                         >Listen Now</button>
