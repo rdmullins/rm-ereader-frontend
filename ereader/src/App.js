@@ -74,7 +74,7 @@ function App() {
     // console.log("Random book ID = ", bookId);
 
     useEffect(() => {
-      let endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us77.gitpod.io/books/bookbyid/?search=${bookId}`
+      let endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us78.gitpod.io/books/bookbyid/?search=${bookId}`
       axios.get(endpoint)
       .then((response)=> setFeaturedBookData(response.data))
     },[]);
@@ -101,13 +101,13 @@ function App() {
         axios.get(endpoint)
           .then((response)=> setBookData(response.data))
           // .then(console.log("Search Endpoint change detected."))
-          .then(setSearchResultEndpoint(`https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us77.gitpod.io/books/author_book/${bookData.bookId}/`))
+          .then(setSearchResultEndpoint(`https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us78.gitpod.io/books/author_book/${bookData.bookId}/`))
       }
 //    },[]);
     },[searchEndpoint]);
 
     useEffect(() => {
-        let endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us77.gitpod.io/books/collections/`
+        let endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us78.gitpod.io/books/collections/`
         axios.get(endpoint)
         .then((response)=> {
           setCollectionsList(response.data)
@@ -117,7 +117,7 @@ function App() {
     },[]);
     
     useEffect(() => {
-      let endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us77.gitpod.io/books/collectionsearch/?search=${collectionFilter}`
+      let endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us78.gitpod.io/books/collectionsearch/?search=${collectionFilter}`
       console.log("Collection search filter is ", collectionFilter);
       axios.get(endpoint)
       .then((response)=> {
