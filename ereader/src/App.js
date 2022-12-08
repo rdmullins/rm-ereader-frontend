@@ -380,8 +380,9 @@ function App() {
                 setDarkMode = {setDarkMode} />
             </>
             }
-
+<button onClick={()=>setView("RSS")}>RSS Test</button>
           </div>
+          
         );
       
   }; 

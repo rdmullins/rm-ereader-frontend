@@ -94,13 +94,13 @@ function Collections(props) {
 
     return (
         <>
-            <div className="container d-flex overflow-scroll">
+            <div className="container d-flex">
             <div className="row">
                 <div className="col-12 col-md-10 d-inline-block p-2 vh-25">
                     <div className="row text-center g-0 border">
                         {/* <div className="d-inline-block p-2 overflow-auto vh-25 list-group-horizontal">{coverScroll}</div> */}
                         {/* <ul className="list-group p-1"> */}
-                        <div className="card-group p-1">
+                        <div className="card-group p-1 overflow-scroll">
                             {coverScroll}
                         {/* </ul> */}
                         </div>
