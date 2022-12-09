@@ -60,7 +60,7 @@ function Header(props) {
 
     return (
         <>
-            <div className="container sticky-top">
+            <div className="container sticky-top bg-light">
                 <div className="row p-2">
                     <div className="col" onClick={() => props.setView("home")}>
                         <a className="navbar-brand" href="#">

@@ -23,6 +23,7 @@ import EPub from "./EPub";
 import EPub2 from "./EPub2";
 import TestRSS from "./TestRSS";
 import Audio from "./Audio";
+import Notes from "./Notes";
 import Cover from "./Cover";
 import "./App.css";
 import { GlobeCentralSouthAsia } from "react-bootstrap-icons";
@@ -202,6 +203,7 @@ function App() {
               <hr></hr>
               <FeaturedBook
                 featuredBookData = {featuredBookData}
+                setBookData = {setBookData}
                 setView = {setView} 
                 setAudioBookData = {setAudioBookData}
                 audioBookData = {audioBookData} 
@@ -320,30 +322,12 @@ function App() {
             </>
             }
 
-            {(view === "EPub") && 
-            <>
-              <Header setView = {setView}
-              darkMode = {darkMode} />
-              <EPub 
-                featuredBookData = {featuredBookData}
-                bookData = {bookData} 
-                etextId = {etextId}
-                setEtextId = {setEtextId} 
-                readingList = {readingList}
-                setReadingList = {setReadingList}/>
-              <Footer 
-                setView = {setView}
-                darkMode = {darkMode}
-                setDarkMode = {setDarkMode}
-                readingList = {readingList}
-                setReadingList = {setReadingList}/>
-            </>
-            }
-
             {(view === "EPub2") &&
             <>
               <Header setView = {setView}
                 darkMode = {darkMode} />
+              <Notes 
+                bookData = {bookData} />
               <EPub2 
                 etextId = {etextId} 
                 readingList = {readingList}
