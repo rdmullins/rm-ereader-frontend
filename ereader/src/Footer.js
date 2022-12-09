@@ -50,7 +50,7 @@ function Footer(props) {
 
     return (
         <>
-            <div className="container sticky-bottom">
+            <div className="container sticky-bottom bg-light">
                 <div className="row text-center">
                     <div className="col-4 clickable"><h3><HouseFill onClick={() => props.setView("home")}></HouseFill></h3></div>
                     <div className="col-4 clickable"><h3><List onClick={toggleMenu}></List></h3></div>

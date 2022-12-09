@@ -3,6 +3,8 @@ import { XCircleFill, Book } from "react-bootstrap-icons";
 
 function FeaturedBook(props) {
 
+    //props.setBookData([]);
+
     const [featuredBookInfo, setFeaturedBookInfo] = useState(false);
 
     let onReadingList = false;
@@ -132,6 +134,8 @@ function FeaturedBook(props) {
                                                 <button type="button" className="btn w-100 m-1 btn-info" 
                                                     onClick={() => {
                                                         props.setEtextId(props.featuredBookData?.[0].gut_id);
+                                                        props.setBookData([]);
+                                                        props.setBookData(props.featuredBookData);
                                                         props.setView("EPub2")}}
                                                 >
                                                     Read Now
