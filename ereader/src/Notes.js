@@ -18,7 +18,7 @@ function Notes(props) {
         unit: "in",
         format: [8.5, 11]
     })
-    
+    let csvData = [];
     let existingNoteArray = [];
     let existingNoteModalBody = [];
 
@@ -146,28 +146,11 @@ function Notes(props) {
                 existingNoteArray.push(currentBookNotes[i])
             }
         }
-
-        console.log("Note found - value is ", existingNoteArray);
-        console.log("Note Title: ", existingNoteArray[0].noteTitle);
-        console.log("Note location: ", existingNoteArray[0].location);
-        console.log("Note body: ", existingNoteArray[0].noteBody);
-        console.log("Now leaving toggleExistingNoteModal");
         
         setExistingNoteModalNoteTitle(existingNoteArray[0].noteTitle);
         setExistingNoteModalNoteLoc(existingNoteArray[0].location);
         setExistingNoteModalNoteBody(existingNoteArray[0].noteBody);
         setExistingNoteUpdated(existingNoteArray[0].updated);
-
-        //existingNoteArray
-
-        // existingNoteModalBody = existingNoteArray.map(element => {
-        // <ul>
-        //     <li>element.noteTitle</li>
-        //     <li>element.location</li>
-        //     <li>element.noteBody</li>
-        // </ul>
-        // })
-
 
         setExistingNote(!existingNote);
     };
@@ -244,14 +227,23 @@ function Notes(props) {
         return;
     }
 
-    // Build CSV Data
+    function createCSVExport() {
 
-    const csvData = [
-        ["firstname", "lastname", "email"],
-        ["Ahmed", "Tomi", "ah@smthing.co.com"],
-        ["Raed", "Labes", "rl@smthing.co.com"],
-        ["Yezzi", "Min l3b", "ymin@cocococo.com"]
-      ];
+        csvData = [
+            ["Book_Title","Author","Note_Title","Note_Location","Note_Body"]
+        ];
+        
+        for (let i=0; i<currentBookNotes.length; i++) {
+            csvData.push([
+                `${props.bookData[0].title}`,
+                `${props.bookData[0].authors[0].last_name}, ${props.bookData[0].authors[0].first_name} (${props.bookData[0].authors[0].dob}-${props.bookData[0].authors[0].dod})`,
+                `${currentBookNotes[i].noteTitle}`,
+                `${currentBookNotes[i].location}`,
+                `${currentBookNotes[i].noteBody}`
+            ]);
+        };
+
+    };
 
     return (
         <>
@@ -288,13 +280,28 @@ function Notes(props) {
                     </p>
                     <div className="container">
                         <div className="row">
-                            <div className="col-6">
+                            <div className="col">
                                 <button className="btn btn-lg w-100 btn-info"
                                     onClick={()=> toggleNewNoteModal()}
                                 >New Note</button>
                             </div>
+                        </div>
+                        <hr/>
+                        <div className="row">
+                            <div className="col">
+                                <h4>Export Options</h4>
+                            </div>
+                        </div>
+                        <div className="row">
                             <div className="col-6">
-                                <button className="btn btn-lg btn-info"><span className="plain-text"><CSVLink data={csvData}>Download All Notes for This Book (CSV)</CSVLink></span></button>
+                                <button className="btn btn-lg btn-info" onClick={()=> {
+                                    createCSVExport();}}>Generate CSV</button>
+                                   <CSVLink data={csvData}>Download CSV</CSVLink>
+                            </div>
+                            <div className="col-6">
+                                <button className="btn btn-lg btn-info" onClick={()=> {
+                                    createPDFExport();
+                                }}>Download PDF</button>
                             </div>
                         </div>
                     </div>
