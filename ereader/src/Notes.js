@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { XCircleFill } from "react-bootstrap-icons";
 import { CSVLink, CSVDownload } from "react-csv";
+import { jsPDF } from "jspdf";
 
 function Notes(props) {
 
@@ -12,8 +13,41 @@ function Notes(props) {
     const [existingNoteModalNoteBody, setExistingNoteModalNoteBody] = useState("");
     const [existingNoteUpdated, setExistingNoteUpdated] = useState(0);
 
+    const notesPDF = new jsPDF({
+        orientation: "portrait",
+        unit: "in",
+        format: [8.5, 11]
+    })
+    
     let existingNoteArray = [];
     let existingNoteModalBody = [];
+
+    function createPDFExport() {
+    
+        notesPDF.setFontSize(10);
+    
+        // Header 
+        notesPDF.text("VoxPublica eReader Notes Export", 1,1);
+        
+        // Book Info
+        notesPDF.text(`${props.bookData[0].title}`, 1, 1.25);
+        notesPDF.text(`${props.bookData[0].authors[0].last_name}, ${props.bookData[0].authors[0].first_name} (${props.bookData[0].authors[0].dob}-${props.bookData[0].authors[0].dod})`, 1,1.5);
+
+        let lineSpace = 1.8;
+
+        // Loop Through and Print Notes
+        for (let i=0; i<currentBookNotes.length; i++) {
+            notesPDF.text(`${currentBookNotes[i].noteTitle}`,1,lineSpace);
+            lineSpace = lineSpace + 0.15;
+            notesPDF.text(`${currentBookNotes[i].location}`,1,lineSpace);
+            lineSpace = lineSpace + 0.15;
+            notesPDF.text(`${currentBookNotes[i].noteBody}`,1.5,lineSpace, {maxWidth: 5.5});
+            lineSpace = lineSpace + 0.5;    
+        }
+        
+        // Export PDF
+        notesPDF.save(`VoxPublica Note Export - ${props.bookData[0].title}`);
+    }
 
     function toggleNoteModal() {
         setNoteModal(!noteModal);
@@ -221,6 +255,7 @@ function Notes(props) {
 
     return (
         <>
+            <button onClick={() => createPDFExport()}>Click to Generate Test PDF</button>
             <div className="container">
             <hr/>
             <button 
