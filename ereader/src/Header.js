@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Book } from 'react-bootstrap-icons';
 import { XCircleFill } from 'react-bootstrap-icons';
 import { EnvelopeFill, Linkedin, Github, Twitter } from 'react-bootstrap-icons';
+
 //import { }
 import "./App.css";
 
@@ -60,51 +61,50 @@ function Header(props) {
 
     return (
         <>
-            <div className="container sticky-top bg-light">
+            <div className="container sticky-top vp-page-background">
                 <div className="row p-2">
                     <div className="col" onClick={() => props.setView("home")}>
                         <a className="navbar-brand" href="#">
-                            <h2><Book alt="Logo" width="30" height="40" className="d-inline-block align-text-top p-1"/>
-                            VoxPublica</h2>
+                            <img src={require('./logo-transparent-png.png')} className="vp-logo" alt="VP Logo"></img>
                         </a>
                     </div>
                 </div>
                 <nav className="row text-center">
-                    <div className="col-6 col-md-3 nav-item nav-link bg-info opacity-75 border p-1 clickable" onClick={togglePublicDomain}>The Public Domain</div>
-                    <div className="col-6 col-md-3 nav-item nav-link bg-info opacity-75 border p-1 clickable" onClick={toggleAbout}>About</div>
-                    <div className="col-6 col-md-3 nav-item nav-link bg-info opacity-75 border p-1 clickable" onClick={toggleContact}>Contact</div>
-                    <div className="col-6 col-md-3 nav-item nav-link bg-info opacity-75 border p-1 clickable" onClick={toggleLogin}>Login/Register</div>
+                    <div className="col-6 col-md-3 nav-item nav-link vp-button border p-1 clickable" onClick={togglePublicDomain}>The Public Domain</div>
+                    <div className="col-6 col-md-3 nav-item nav-link vp-button border p-1 clickable" onClick={toggleAbout}>About</div>
+                    <div className="col-6 col-md-3 nav-item nav-link vp-button border p-1 clickable" onClick={toggleContact}>Contact</div>
+                    <div className="col-6 col-md-3 nav-item nav-link vp-button border p-1 clickable" onClick={toggleLogin}>Login/Register</div>
                 </nav>
             </div>
 
             {pubDomain && (
             <div className="modal">
             <div onClick={togglePublicDomain} className="overlay"></div>
-            <div className="modal-content">
-                <h2>What Is the Public Domain?</h2>
-
+            <div className="modal-content vp-background">
+                <h2 className="vp-featured-text">What Is the Public Domain?</h2>
+            <div className = "vp-body-text">
                 <blockquote cite="https://en.wikipedia.org/wiki/Public_domain">"The public domain (PD) consists of all the creative work to which no 
                 exclusive intellectual property rights apply. Those rights may have 
                 expired, been forfeited, expressly waived, or may be inapplicable. 
                 Because those rights have expired, anyone can legally use or reference 
                 those works without permission."
+                <em className="float-end">- Wikipedia</em>
                 </blockquote>
-                <em>- Wikipedia</em>
 
                 <p>
                     Many classic works of literature are in the pubic domain due to the reasons
-                    cited above. <em>VoxPublica</em> seeks to make these works available to everyone
+                    cited above. <span className="vp-featured-text"><strong>VoxPublica</strong></span> seeks to make these works available to everyone
                     using familiar e-reader functionality.
                 </p>
 
-                    <h4>Additional Information</h4>
-                    <ul>
+                    <h4 className="vp-featured-text">Additional Information</h4>
+                    <ul className="vp-body-text">
                         <li><a href="https://web.law.duke.edu/cspd/" target="blank">Duke University Center for the Study of the Public Domain</a></li>
                         <li><a href="https://www.gutenberg.org" target="blank">Project Gutenberg</a></li>
                         <li><a href="https://www.librivox.org" target="blank">Librivox</a></li>
                     </ul>
-
-                <h2 className="close-modal" onClick={togglePublicDomain}>
+            </div>
+                <h2 className="close-modal vp-svg" onClick={togglePublicDomain}>
                 <XCircleFill></XCircleFill>
                 </h2>
             </div>
@@ -114,30 +114,30 @@ function Header(props) {
         {contact && (
             <div className="modal">
             <div onClick={toggleContact} className="overlay"></div>
-            <div className="modal-content">
-                <h2>Contact</h2>
+            <div className="modal-content vp-background">
+                <h2 className="vp-featured-text">Contact</h2>
                     <div className="row text-center">
                         <div className="col">
-                            <h1>Roger Mullins</h1>
-                            <h2>Full Stack Web Developer</h2>
-                            <h3>Based in Lexington, Kentucky, USA</h3>
+                            <h1 className="vp-featured-text">Roger Mullins</h1>
+                            <h2 className="vp-body-text">Full Stack Web Developer</h2>
+                            <h3 className="vp-body-text">Based in Lexington, Kentucky, USA</h3>
                         </div>
                     </div>
                     <div className="row text-center">
                         <div className="col-3">
-                            <h1><a href="mailto:rogermullins.mba@gmail.com" target="blank"><EnvelopeFill></EnvelopeFill></a></h1>
+                            <span className="vp-svg"><h1 className="vp-svg"><a href="mailto:rogermullins.mba@gmail.com" target="blank"><EnvelopeFill></EnvelopeFill></a></h1></span>
                         </div>
                         <div className="col-3">
-                            <h1><a href="https://www.twitter.com/roger_mba" target="blank"><Twitter></Twitter></a></h1>
+                            <h1 className="vp-svg"><a href="https://www.twitter.com/roger_mba" target="blank"><Twitter></Twitter></a></h1>
                         </div>
                         <div className="col-3">
-                            <h1><a href="https://www.linkedin.com/in/rdmullins" target="blank"><Linkedin></Linkedin></a></h1>
+                            <h1 className="vp-svg"><a href="https://www.linkedin.com/in/rdmullins" target="blank"><Linkedin></Linkedin></a></h1>
                         </div>
                         <div className="col-3">
-                            <h1><a href="https://www.github.com/rdmullins" target="blank"><Github></Github></a></h1>
+                            <h1 className="vp-svg"><a href="https://www.github.com/rdmullins" target="blank"><Github></Github></a></h1>
                         </div>
                     </div>
-                <h2 className="close-modal" onClick={toggleContact}>
+                <h2 className="close-modal vp-svg" onClick={toggleContact}>
                 <XCircleFill></XCircleFill>
                 </h2>
             </div>
@@ -147,12 +147,12 @@ function Header(props) {
         {about && (
             <div className="modal">
             <div onClick={toggleAbout} className="overlay"></div>
-            <div className="modal-content">
-                <h2>About</h2>
-                    <p>
+            <div className="modal-content vp-background">
+                <h2 className="vp-featured-text">About</h2>
+                    <p className="vp-body-text">
                         Lorem ipsum etc.
                     </p>
-                <h2 className="close-modal" onClick={toggleAbout}>
+                <h2 className="close-modal vp-svg" onClick={toggleAbout}>
                 <XCircleFill></XCircleFill>
                 </h2>
             </div>

@@ -1,3 +1,28 @@
+/*
+
+VoxPublica - Branding Info
+
+Palette - 'Pumpkin Patch' from Canva
+
+    Image: #3F170E #C08C46 #D56A34
+    Text Primary: #3F170E
+    Text Secondary: #D56A34
+    Background: #F9F7E9
+
+Fonts:
+    Tenor Sans (Logo)
+    Poppins Light (Body)
+
+Google Fonts API
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&family=Tenor+Sans&display=swap');
+</style>
+
+font-family: 'Poppins', sans-serif;
+font-family: 'Tenor Sans', sans-serif;
+
+*/
+
 /* body {    /* The image used */
     /* background-image: url("./pexels-stanislav-kondratiev-2908984.jpg");
 
@@ -9,6 +34,82 @@
     background-repeat: no-repeat;
     background-size: cover;
 } */ 
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&family=Tenor+Sans&display=swap');
+
+/* Branding Color Declarations */
+
+:root {
+    --vp-background:    #F9F7E9;
+    --vp-text-primary:  #3F170E;
+    --vp-text-secondary: #D56A34;
+    --vp-button:        #D56A34;
+    --vp-accent:        #C08C46;
+}
+
+a:link {
+    color: var(--vp-text-secondary);
+}
+
+a:visited {
+    color: var(--vp-text-primary);
+}
+
+a:hover {
+    color: var(--vp-button);
+}
+
+a:active {
+    color: var(--vp-accent);
+}
+
+.vp-book-cover {
+    width: 12vw;
+    height: 20vh;
+    border: 1pt solid var(--vp-button);
+}
+
+.vp-page-background {
+    background-color: var(--vp-background);
+}
+
+.vp-button {
+    background-color: var(--vp-button);
+    color: var(--vp-background);
+    font-family: "Poppins", sans-serif;
+}
+
+.vp-button:hover {
+    border: 1pt solid var(--vp-button);
+}
+
+.vp-svg {
+    color: var(--vp-button);
+}
+
+.vp-body-text {
+    color: var(--vp-text-primary);
+    font-family: "Poppins", sans-serif;
+}
+
+.vp-featured-text {
+    color: var(--vp-text-primary);
+    font-family: "Tenor Sans", sans-serif;
+    text-transform: uppercase;
+}
+
+.vp-card {
+    background-color: var(--vp-background);
+    color: var(--vp-text-primary);
+    font-family: "Poppins", sans-serif;
+    border: 1pt solid var(--vp-button);
+}
+
+.vp-logo {
+    width: 20vw;
+    height: auto;
+    max-width: 40vw;
+}
 
 .plain-link {
     text-decoration: none;
