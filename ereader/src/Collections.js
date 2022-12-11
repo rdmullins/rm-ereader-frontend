@@ -7,10 +7,13 @@ function Collections(props) {
     let coverList = [];
     let filteredCollection = [];
     let coverScroll = {};
+    let onReadingList = false;
 
     const [bookInfo, setBookInfo] = useState(false);
     const [modalTitle, setModalTitle] = useState("");
     const [modalDesc, setModalDesc] = useState("");
+    const [modalAuth, setModalAuth] = useState("");
+    const [modalID, setModalID] = useState(0)
 
     function toggleBookInfo() {
         setBookInfo(!bookInfo);
@@ -36,9 +39,9 @@ function Collections(props) {
 
     coverScroll = props.collectionsReturned.map(cover => 
 
-        <div className="col-3">
+        <div className="col col-md-4 col-lg-3">
             <div className="card vp-card text-center h-100" key={cover.id}>
-                <img src={cover.cover_url} className="mx-auto mt-3 img-fluid vp-book-cover" alt="Book Cover"/>
+                <img src={cover.cover_url} className="mx-auto mt-3 vp-book-cover" alt="Book Cover"/>
             <div className="card-body">
                 <h5 className="card-title vp-featured-text">{cover.title}</h5>
                 <p className="card-text vp-body-text"> 
@@ -56,8 +59,19 @@ function Collections(props) {
                     >Listen</a>
                 <br/>
                 <a href="#" onClick={() => {
+                    onReadingList=false;
+                    for (let i=0; i<props.readingList.length; i++) {
+                        if (props.readingList[i].bookID === cover.gut_id) {
+                            onReadingList = true; 
+                        } else {
+                            onReadingList = false;
+                        }
+                    }
+                    let authorString = `${cover.authors[0].first_name} ${cover.authors[0].last_name}`
                     setModalTitle(cover.title); 
                     setModalDesc(cover.description); 
+                    setModalAuth(authorString);
+                    setModalID(cover.gut_id);
                     props.setBookData([]);
                     props.setBookData(cover);
                     toggleBookInfo();
@@ -132,6 +146,42 @@ function Collections(props) {
                                 props.setView("audio");
                             }}
                         >Listen Now</button>
+
+                    {(onReadingList) &&
+                        <button type="button" className="btn w-100 m-1 vp-button"
+                        onClick={() => {
+                            let tempReadingList = [...props.readingList];
+
+                            for (let i=0; i<tempReadingList.length; i++) {
+                                if (tempReadingList[i].bookID === modalID) {
+                                    tempReadingList[i].isActive = false; 
+                                }
+                            };
+                            props.setReadingList(tempReadingList);
+                            localStorage.setItem("readingList", JSON.stringify(tempReadingList));  
+                        }}
+                    >Remove From Reading List</button>
+                    }
+
+
+                    {(!onReadingList) &&
+                        <button className="btn m-1 w-100 vp-button"
+                            onClick={() => {
+                                let tempReadingList = [
+                                    ...props.readingList, {
+                                    bookID: modalID,
+                                    title: modalTitle,
+                                    author: modalAuth,
+                                    isActive: true,
+                                    updated: Date.now(),
+                                    }
+                                ];
+                                props.setReadingList(tempReadingList);
+                                localStorage.setItem("readingList", JSON.stringify(tempReadingList));  
+                            }}
+                        >Add To Reading List</button>
+                    }
+
                     </p>
                     <h2 className="close-modal vp-svg" onClick={toggleBookInfo}>
                         <XCircleFill></XCircleFill>

@@ -72,7 +72,7 @@ function Search(props) {
                 </div>
                 <div className="col-1"></div>
             </div>
-            <div className="row text-center">
+            <div className="row text-center pt-1">
                 <div className="col">
                 <ul className="list-group list-group-horizontal">
                     <li className="col-4 list-group-item border-0 bg-transparent">

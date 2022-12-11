@@ -96,9 +96,9 @@ function Audio(props) {
         console.log(i);
         trackListHold.push([
         <>
-          <tr>
-            <td>{i}</td>
-            <td><div onClick={() => setCurrentTrack(audioBookRecord?.[0].tracks[i].track_url)}>Track {i}</div></td>
+          <tr key={i+1}>
+            <td>{i+1}</td>
+            <td><div onClick={() => setCurrentTrack(audioBookRecord?.[0].tracks[i].track_url)}>Track {i+1}</div></td>
           </tr>
         </>
         ])

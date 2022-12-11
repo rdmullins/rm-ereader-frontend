@@ -65,15 +65,15 @@ function Header(props) {
                 <div className="row p-2">
                     <div className="col" onClick={() => props.setView("home")}>
                         <a className="navbar-brand" href="#">
-                            <img src={require('./logo-transparent-png.png')} className="vp-logo" alt="VP Logo"></img>
+                            <img src={require('./blue-logo-transparent-png.png')} className="vp-logo" alt="VP Logo"></img>
                         </a>
                     </div>
                 </div>
                 <nav className="row text-center">
-                    <div className="col-6 col-md-3 nav-item nav-link vp-button border p-1 clickable" onClick={togglePublicDomain}>The Public Domain</div>
-                    <div className="col-6 col-md-3 nav-item nav-link vp-button border p-1 clickable" onClick={toggleAbout}>About</div>
-                    <div className="col-6 col-md-3 nav-item nav-link vp-button border p-1 clickable" onClick={toggleContact}>Contact</div>
-                    <div className="col-6 col-md-3 nav-item nav-link vp-button border p-1 clickable" onClick={toggleLogin}>Login/Register</div>
+                    <button className="col-6 col-md-3 nav-item vp-button border p-1 clickable" onClick={togglePublicDomain}>The Public Domain</button>
+                    <button className="col-6 col-md-3 nav-item vp-button border p-1 clickable" onClick={toggleAbout}>About</button>
+                    <button className="col-6 col-md-3 nav-item vp-button border p-1 clickable" onClick={toggleContact}>Contact</button>
+                    <button className="col-6 col-md-3 nav-item vp-button border p-1 clickable" onClick={toggleLogin}>Login/Register</button>
                 </nav>
             </div>
 

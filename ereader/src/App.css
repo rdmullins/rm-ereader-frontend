@@ -40,11 +40,17 @@ font-family: 'Tenor Sans', sans-serif;
 /* Branding Color Declarations */
 
 :root {
-    --vp-background:    #F9F7E9;
+    /* --vp-background:    #F9F7E9; */
+    --vp-background: #EDE2CF;
     --vp-text-primary:  #3F170E;
     --vp-text-secondary: #D56A34;
-    --vp-button:        #D56A34;
+    /*--vp-button:        #D56A34;*/
+    --vp-button:        #004AAD;
     --vp-accent:        #C08C46;
+}
+
+.vp-body {
+    height: 100%;
 }
 
 a:link {
@@ -64,9 +70,18 @@ a:active {
 }
 
 .vp-book-cover {
-    width: 12vw;
-    height: 20vh;
+    width: auto;
+    height: 200px;
     border: 1pt solid var(--vp-button);
+    opacity: 0.7;
+}
+
+.vp-flex-fill {
+    flex: 1;
+}
+
+.vp-book-cover:hover {
+    opacity: 1;
 }
 
 .vp-page-background {
@@ -75,7 +90,9 @@ a:active {
 
 .vp-button {
     background-color: var(--vp-button);
-    color: var(--vp-background);
+    /* color: var(--vp-background); */
+    color: white;
+    font-weight: bold;
     font-family: "Poppins", sans-serif;
 }
 
@@ -106,7 +123,7 @@ a:active {
 }
 
 .vp-logo {
-    width: 20vw;
+    width: 25vw;
     height: auto;
     max-width: 40vw;
 }
@@ -134,8 +151,8 @@ a:active {
 
 .collection-cover {
     display: inline-block;
-    height: 12vh;
-    width: 8vh;
+    height: auto;
+    width: 8vw;
 }
 
 .clickable {

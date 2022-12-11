@@ -247,17 +247,16 @@ function Notes(props) {
 
     return (
         <>
-            <button onClick={() => createPDFExport()}>Click to Generate Test PDF</button>
             <div className="container">
             <hr/>
             <button 
                 type="button" 
-                class="btn btn-info"
+                class="btn vp-button"
                 onClick={() => {
                     toggleNoteModal();
                 }}
                 >Notes&nbsp;&nbsp; 
-                <span class="badge text-bg-danger">{currentBookNotes.length}</span>
+                <span class="badge text-bg-warning">{currentBookNotes.length}</span>
             </button>
             <hr/>
             </div>
@@ -269,7 +268,7 @@ function Notes(props) {
                     <h2>Notes</h2>
                     <h4>{props.bookData[0].title}</h4>
                     <br/>
-                    <button className="btn btn-lg w-100 btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button className="btn btn-lg w-100 vp-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Notes List    
                     </button>
                     <ul className="dropdown-menu">
@@ -281,7 +280,7 @@ function Notes(props) {
                     <div className="container">
                         <div className="row">
                             <div className="col">
-                                <button className="btn btn-lg w-100 btn-info"
+                                <button className="btn btn-lg w-100 vp-button"
                                     onClick={()=> toggleNewNoteModal()}
                                 >New Note</button>
                             </div>
@@ -289,23 +288,23 @@ function Notes(props) {
                         <hr/>
                         <div className="row">
                             <div className="col">
-                                <h4>Export Options</h4>
+                                <h4>Export Notes</h4>
                             </div>
                         </div>
                         <div className="row">
-                            <div className="col-6">
+                            {/* <div className="col-6">
                                 <button className="btn btn-lg btn-info" onClick={()=> {
                                     createCSVExport();}}>Generate CSV</button>
                                    <CSVLink data={csvData}>Download CSV</CSVLink>
-                            </div>
-                            <div className="col-6">
-                                <button className="btn btn-lg btn-info" onClick={()=> {
+                            </div> */}
+                            <div className="col">
+                                <button className="btn btn-lg w-100 vp-button" onClick={()=> {
                                     createPDFExport();
                                 }}>Download PDF</button>
                             </div>
                         </div>
                     </div>
-                        <h2 className="close-modal" onClick={()=>toggleNoteModal()}>
+                        <h2 className="close-modal vp-svg" onClick={()=>toggleNoteModal()}>
                         <XCircleFill></XCircleFill>
                     </h2>
 

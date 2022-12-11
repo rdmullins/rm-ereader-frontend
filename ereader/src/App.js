@@ -69,6 +69,8 @@ function App() {
       localStorage.setItem("readingList", JSON.stringify([
         {
           bookID: 0,
+          title: "",
+          author: "",
           isActive: false,
           updated: 0
         }
@@ -147,11 +149,14 @@ function App() {
       console.log("Inside myBook useEffect. Search endpoint is ", myBookSearch);
       if (myBookSearch !== "") {
         let endpoint = myBookSearch
+        console.log("Inside myBookSearch UseEffect conditional. Endpoint is ", endpoint);
         axios.get(endpoint)
           .then((response)=> setBookData(response.data))
           // .then(console.log("Search Endpoint change detected."))
           //.then(setMyBookSearch(`https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us78.gitpod.io/books/bookbyid/?search=${bookData.bookId}/`))
+        
       }
+      console.log("Bookdata inside the myBookSearch useEffect is ", bookData);
 //    },[]);
     },[myBookSearch]);
 
@@ -234,12 +239,12 @@ function App() {
                 setReadingList = {setReadingList}
                 bookData = {bookData}
                 setBookData = {setBookData} />
-              <Categories 
+              {/* <Categories 
                 setView = {setView} 
                 audioBookId = {audioBookId}
                 setAudioBookId = {setAudioBookId}
                 readingList = {readingList}
-                setReadingList = {setReadingList} />
+                setReadingList = {setReadingList} /> */}
               <Footer 
                 setView = {setView} 
                 darkMode = {darkMode}
@@ -263,7 +268,10 @@ function App() {
                 searchEndpoint = {searchEndpoint}
                 setSearchEndpoint = {setSearchEndpoint} 
                 myBookSearch = {myBookSearch}
-                setMyBookSearch = {setMyBookSearch} />
+                setMyBookSearch = {setMyBookSearch}
+                setAudioBookId = {setAudioBookId}
+                setEtextId = {setEtextId}
+                setView = {setView} />
               <Footer 
                 setView = {setView}
                 darkMode = {darkMode}

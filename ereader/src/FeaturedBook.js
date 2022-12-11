@@ -42,10 +42,10 @@ function FeaturedBook(props) {
                                 <div className="row">
                                     <div className="card-body">
                                         <div className="row">
-                                            <div className="col-3">
+                                            <div className="col col-lg-3">
                                                 <img src={props.featuredBookData?.[0].cover_url} alt="Book Cover"></img>
                                             </div>
-                                            <div className="col-6">
+                                            <div className="col col-lg-6">
                                                 <h4><em>{props.featuredBookData?.[0].title}</em></h4>
                                                 <p>
                                                     <strong>
@@ -63,11 +63,11 @@ function FeaturedBook(props) {
                                                 {(onReadingList) && 
                                                     <>
                                                         <hr/>
-                                                        <h2>
+                                                        <div className="vp-body-text">
                                                             <Book /> 
                                                             <span> On your reading list! </span>
                                                             <Book />
-                                                        </h2>
+                                                        </div>
                                                         <button className="btn m-1 vp-button"
                                                             id="removeReadingListToastBtn"
                                                             onClick={() => {
@@ -94,6 +94,8 @@ function FeaturedBook(props) {
                                                                 let tempReadingList = [
                                                                     ...props.readingList, {
                                                                       bookID: props.featuredBookData?.[0].gut_id,
+                                                                      title: props.featuredBookData?.[0].title,
+                                                                      author: `${props.featuredBookData?.[0].authors[0].first_name} ${props.featuredBookData?.[0].authors[0].last_name}`,
                                                                       isActive: true,
                                                                       updated: Date.now(),
                                                                     }
@@ -106,7 +108,7 @@ function FeaturedBook(props) {
                                                 }
 
                                             </div>
-                                            <div className="col-3">
+                                            <div className="col col-lg-3">
                                                 <button type="button" className="btn w-100 m-1 vp-button" 
                                                     onClick={() => {
                                                         props.setEtextId(props.featuredBookData?.[0].gut_id);
