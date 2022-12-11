@@ -45,7 +45,7 @@ function Search(props) {
     }
 
     return (
-        <div className="container border p-1">
+        <div className="container p-1 pt-4 vp-background vp-body-text">
             <form onSubmit={(e) => {
                 e.preventDefault();
                 handleFormSubmit(e, props.searchTerm)
@@ -64,7 +64,7 @@ function Search(props) {
                         aria-describedby="searchButton">
                     </input>
                     <button 
-                        className="btn btn-outline-secondary" 
+                        className="btn vp-button" 
                         type="submit" 
                         id="searchButton">
                             Search
@@ -75,7 +75,7 @@ function Search(props) {
             <div className="row text-center">
                 <div className="col">
                 <ul className="list-group list-group-horizontal">
-                    <li className="col-4 list-group-item border-0">
+                    <li className="col-4 list-group-item border-0 bg-transparent">
                         <input 
                             className="form-check-input me-1" 
                             type="radio" 
@@ -90,7 +90,7 @@ function Search(props) {
                                 Title
                         </label>
                     </li>
-                    <li className="col-4 list-group-item border-0">
+                    <li className="col-4 list-group-item border-0 bg-transparent">
                         <input 
                             className="form-check-input me-1" 
                             type="radio" 
@@ -104,7 +104,7 @@ function Search(props) {
                                 Author
                         </label>
                     </li>
-                    <li className="col-4 list-group-item border-0">
+                    <li className="col-4 list-group-item border-0 bg-transparent">
                         <input 
                             className="form-check-input me-1" 
                             type="radio" 

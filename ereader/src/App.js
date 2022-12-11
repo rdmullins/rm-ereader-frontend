@@ -26,6 +26,7 @@ import Audio from "./Audio";
 import Notes from "./Notes";
 import Cover from "./Cover";
 import "./App.css";
+
 import { GlobeCentralSouthAsia } from "react-bootstrap-icons";
 //import { getStorage, getRef, getDownloadUrl } from Firebase.storage
 
@@ -179,7 +180,7 @@ function App() {
 
         return (
 
-          <div className="container">
+          <div className="container-fluid vp-page-background">
 
             {(view === "home") &&
             <>
@@ -200,7 +201,6 @@ function App() {
                 setEtextId = {setEtextId}
                 readingList = {readingList}
                 setReadingList = {setReadingList} />
-              <hr></hr>
               <FeaturedBook
                 featuredBookData = {featuredBookData}
                 setBookData = {setBookData}
@@ -231,23 +231,22 @@ function App() {
                 audioBookURL = {audioBookURL}
                 setAudioBookURL = {setAudioBookURL}
                 readingList = {readingList}
-                setReadingList = {setReadingList} />
+                setReadingList = {setReadingList}
+                bookData = {bookData}
+                setBookData = {setBookData} />
               <Categories 
                 setView = {setView} 
                 audioBookId = {audioBookId}
                 setAudioBookId = {setAudioBookId}
                 readingList = {readingList}
                 setReadingList = {setReadingList} />
-              <hr></hr>
               <Footer 
                 setView = {setView} 
                 darkMode = {darkMode}
                 setDarkMode = {setDarkMode}
                 readingList = {readingList}
                 setReadingList = {setReadingList} />
-              {/* <button onClick={() => handleDemoClick()}>EPub Reader Demo</button> */}
-              {/* <button onClick={() => handleRSSClick()}>RSS Reader Demo</button> */}
-            </>
+              </>
             }
 
             {(view === "myBooks") &&
@@ -265,7 +264,6 @@ function App() {
                 setSearchEndpoint = {setSearchEndpoint} 
                 myBookSearch = {myBookSearch}
                 setMyBookSearch = {setMyBookSearch} />
-              <hr></hr>
               <Footer 
                 setView = {setView}
                 darkMode = {darkMode}
@@ -278,7 +276,7 @@ function App() {
             {(view === "search") && 
             <>
               <Header setView = {setView}
-              darkMode = {darkMode} />
+                darkMode = {darkMode} />
               <Search 
                 searchTerm = {searchTerm} 
                 setSearchTerm = {setSearchTerm} 
@@ -297,7 +295,6 @@ function App() {
                 setAudioBookURL = {setAudioBookURL} 
                 readingList = {readingList}
                 setReadingList = {setReadingList}/>
-              <hr></hr>
               <SearchView 
                 searchType = {searchType} 
                 setView = {setView}
@@ -312,7 +309,6 @@ function App() {
                 setAudioBookURL = {setAudioBookURL}
                 readingList = {readingList}
                 setReadingList = {setReadingList} />
-              <hr></hr>
               <Footer 
                 setView = {setView}
                 darkMode = {darkMode}
@@ -464,7 +460,7 @@ function App() {
                 setReadingList = {setReadingList} />
             </>
             }
-<button onClick={() => populateLocalStorage()}>Populate LocalStorage</button>
+
           </div>
           
         );
