@@ -73,7 +73,7 @@ function Header(props) {
                     <button className="col-6 col-md-3 nav-item vp-button border p-1 clickable" onClick={togglePublicDomain}>The Public Domain</button>
                     <button className="col-6 col-md-3 nav-item vp-button border p-1 clickable" onClick={toggleAbout}>About</button>
                     <button className="col-6 col-md-3 nav-item vp-button border p-1 clickable" onClick={toggleContact}>Contact</button>
-                    <button className="col-6 col-md-3 nav-item vp-button border p-1 clickable" onClick={toggleLogin}>Login/Register</button>
+                    <button className="col-6 col-md-3 nav-item vp-button border p-1 clickable" onClick={() => props.setView("myBooks")}>My Books</button>
                 </nav>
             </div>
 

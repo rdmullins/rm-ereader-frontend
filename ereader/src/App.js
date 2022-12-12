@@ -32,7 +32,7 @@ import { GlobeCentralSouthAsia } from "react-bootstrap-icons";
 
 
 function App() {
-    console.log("Started App");
+    // console.log("Started App");
 
     initializeApp("Firebase.js");
     
@@ -110,7 +110,7 @@ function App() {
     let bookId = Math.floor((Math.random()*5))
     // console.log("Random book ID = ", bookId);
 
-    console.log("ReadingList = ", readingList);
+    // console.log("ReadingList = ", readingList);
 
     useEffect(() => {
       let endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us78.gitpod.io/books/bookbyid/?search=${bookId}`
@@ -146,17 +146,17 @@ function App() {
     },[searchEndpoint]);
 
     useEffect(() => {
-      console.log("Inside myBook useEffect. Search endpoint is ", myBookSearch);
+      // console.log("Inside myBook useEffect. Search endpoint is ", myBookSearch);
       if (myBookSearch !== "") {
         let endpoint = myBookSearch
-        console.log("Inside myBookSearch UseEffect conditional. Endpoint is ", endpoint);
+        // console.log("Inside myBookSearch UseEffect conditional. Endpoint is ", endpoint);
         axios.get(endpoint)
           .then((response)=> setBookData(response.data))
           // .then(console.log("Search Endpoint change detected."))
           //.then(setMyBookSearch(`https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us78.gitpod.io/books/bookbyid/?search=${bookData.bookId}/`))
         
       }
-      console.log("Bookdata inside the myBookSearch useEffect is ", bookData);
+      // console.log("Bookdata inside the myBookSearch useEffect is ", bookData);
 //    },[]);
     },[myBookSearch]);
 
@@ -172,11 +172,11 @@ function App() {
     
     useEffect(() => {
       let endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us78.gitpod.io/books/collectionsearch/?search=${collectionFilter}`
-      console.log("Collection search filter is ", collectionFilter);
+      // console.log("Collection search filter is ", collectionFilter);
       axios.get(endpoint)
       .then((response)=> {
         setCollectionsReturned(response.data)
-        console.log("Collections Returned: ", collectionsReturned);
+        // console.log("Collections Returned: ", collectionsReturned);
         return response.data
       })
       // .then((collectionsList) => console.log("Collections: ", collectionsList))
@@ -316,7 +316,8 @@ function App() {
                 audioBookURL = {audioBookURL}
                 setAudioBookURL = {setAudioBookURL}
                 readingList = {readingList}
-                setReadingList = {setReadingList} />
+                setReadingList = {setReadingList}
+                setBookData = {setBookData} />
               <Footer 
                 setView = {setView}
                 darkMode = {darkMode}

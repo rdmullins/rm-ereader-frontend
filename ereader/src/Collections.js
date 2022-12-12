@@ -39,7 +39,7 @@ function Collections(props) {
 
     coverScroll = props.collectionsReturned.map(cover => 
 
-        <div className="col col-md-4 col-lg-3">
+        <div className="col col-md-4 col-lg-3" key={cover.gut_id}>
             <div className="card vp-card text-center h-100" key={cover.id}>
                 <img src={cover.cover_url} className="mx-auto mt-3 vp-book-cover" alt="Book Cover"/>
             <div className="card-body">

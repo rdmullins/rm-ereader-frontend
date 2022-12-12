@@ -7,6 +7,7 @@ function SearchView(props) {
     const [bookInfo, setBookInfo] = useState(false);
     const [modalTitle, setModalTitle] = useState("");
     const [modalDesc, setModalDesc] = useState("");
+    const [modalID, setModalID] = useState(0);
 
     function toggleBookInfo() {
         setBookInfo(!bookInfo);
@@ -25,26 +26,11 @@ function SearchView(props) {
     let onReadingList = false;
 
     const searchList = bookData.map(book => (
-        // {
-
-        //         console.log("Book Data in Search View:", bookData);
-        //         for (let i=0; i<props.readingList.length; i++) {
-        //             for (let j=0; j<bookData.length; j++) {
-        //                 console.log("Checking reading list item ", i, " with an ID of ", props.readingList[i].bookID);
-        //                 console.log("Against bookData item ", j, " with an ID of ", props.bookData?.[j].gut_id);
-        //                 if (props.readingList[i].bookID === props.bookData?.[j].gut_id && props.readingList[i].isActive === true) {
-        //                     onReadingList = true; 
-        //                 } else {
-        //                     onReadingList = false;
-        //                 }
-        //             }
-        //         }
-        // })
-
+     
         <>
-        <div className="container" key={book.id}>
+        <div className="container vp-body-text" key={book.id}>
             <div className="row">
-                <div className="card mb-3 col-12">
+                <div className="card mb-3 col-12 vp-card">
                     <div className="row">
                         <div className="card-body">
                             <div className="row">
@@ -58,7 +44,7 @@ function SearchView(props) {
                                             {book.authors && book.authors[0].first_name} &nbsp;
                                             {book.authors && book.authors[0].last_name} &nbsp;   
                                         </strong>
-                                            {/* {book.author_role && book.author_role[0].role} */}
+                                            
                                         (
                                             {book.authors && book.authors[0].dob}
                                             -
@@ -73,9 +59,8 @@ function SearchView(props) {
                                                 <Book /> 
                                                 <span> On your reading list!</span>
                                             </h2>
-                                            <button className="btn m-1 btn-info"
+                                            <button className="btn m-1 vp-button"
                                                 onClick={() => {
-                                                    console.log("Remove Button Clicked.");
                                                     let tempReadingList = [...props.readingList];
 
                                                     for (let i=0; i<tempReadingList.length; i++) {
@@ -85,8 +70,6 @@ function SearchView(props) {
                                                     };
                                                     props.setReadingList(tempReadingList);
                                                     localStorage.setItem("readingList", JSON.stringify(tempReadingList));  
-                                                    console.log("State version of reading list: ", props.readingList);
-                                                    console.log("LocalStorage version: ", localStorage.getItem("readingList"));                                                           
                                                 }}
                                             >Remove From Reading List</button>
                                         </>
@@ -96,9 +79,8 @@ function SearchView(props) {
                                         <>
                                             <hr/>
                                 
-                                            <button className="btn m-1 btn-info"
+                                            <button className="btn m-1 vp-button"
                                                 onClick={() => {
-                                                    console.log("Add Button Clicked.");
                                                     let dateUpdated = Date.now();
                                                     let tempReadingList = [
                                                         ...props.readingList, {
@@ -109,8 +91,6 @@ function SearchView(props) {
                                                         ];
                                                     props.setReadingList(tempReadingList);
                                                     localStorage.setItem("readingList", JSON.stringify(tempReadingList));  
-                                                    console.log("State version of reading list: ", props.readingList);
-                                                    console.log("LocalStorage version: ", localStorage.getItem("readingList"));                                                              
                                                 }}
                                             >Add To Reading List</button>
                                         </>
@@ -118,17 +98,23 @@ function SearchView(props) {
 
                                 </div>
                                 <div className="col-3">
-                                    <button type="button" className="btn w-100 m-1 btn-info" 
+                                    <button type="button" className="btn w-100 m-1 vp-button" 
                                         onClick={() => {
                                             props.setEtextId(book.gut_id);
                                             props.setView("EPub2")}}
                                         >Read Now
                                     </button>
-                                    <button type="button" className="btn w-100 m-1 btn-info">Listen Now</button>
-                                    <button type="button" className="btn w-100 m-1 btn-info" onClick={() => 
+                                    <button type="button" className="btn w-100 m-1 vp-button"
+                                        onClick={() => {
+                                            props.setAudioBookId(book.gut_id);
+                                            props.setView("audio");
+                                        }}
+                                    >Listen Now</button>
+                                    <button type="button" className="btn w-100 m-1 vp-button" onClick={() => 
                                         {
                                         setModalTitle(book.title);
                                         setModalDesc(book.description);
+                                        setModalID(book.gut_id);
                                         toggleBookInfo();
                                         }}>Info
                                     </button>
@@ -142,43 +128,47 @@ function SearchView(props) {
         </>
     ))
 
-    // if(bookData){
-    //     console.log("Inside first SearchView conditional.")
-    //     console.log("props.bookData = ", bookData);
-    //     if(bookData?.book){
-    //         console.log("Inside second SearchView conditional.")
-    //         console.log("props.bookData = ", bookData);
     return (
         <>
-        <div>
-            <h2>Search Results</h2>
-            {searchList}
-        </div> 
+        <div className="container vp-background">
+            <div className="row text-center">
+                <h2 className="vp-featured-text">Search Results</h2>
+            </div>
+            <div className="row">
+                {searchList}
+            </div> 
 
         {bookInfo && (
             <div className="modal">
             <div onClick={toggleBookInfo} className="overlay"></div>
             <div className="modal-content">
-                <h2>{modalTitle}</h2>
-                <div dangerouslySetInnerHTML={{__html: modalDesc}}></div>
+                <h2 className="vp-featured-text">{modalTitle}</h2>
+                <div className="vp-body-text" dangerouslySetInnerHTML={{__html: modalDesc}}></div>
                 <p>
-                    <button type="button" className="btn w-100 m-1 btn-info">Read Now</button>
-                    <button type="button" className="btn w-100 m-1 btn-info">Listen Now</button>
+                <button type="button" className="btn w-100 m-1 vp-button" 
+                    onClick={() => {
+                        props.setEtextId(modalID);
+                        props.setView("EPub2")}}
+                >
+                    Read Now
+                </button>
+                <button type="button" className="btn w-100 m-1 vp-button"
+                    onClick={() => {
+                        props.setAudioBookId(modalID);
+                        props.setView("audio");
+                    }}
+                >Listen Now</button>
                 </p>
-                <h2 className="close-modal" onClick={toggleBookInfo}>
+                <h2 className="close-modal vp-svg" onClick={toggleBookInfo}>
                     <XCircleFill></XCircleFill>
                 </h2>
             </div>
             </div>
         )}
-
+            </div>
         </>
     )
-    //     } else {
-    //         {console.log("Inside SearchView else")}
-  
-    //     };
-    // };
+
 };
 
 export default SearchView;

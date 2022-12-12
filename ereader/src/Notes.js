@@ -20,7 +20,6 @@ function Notes(props) {
     })
     let csvData = [];
     let existingNoteArray = [];
-    let existingNoteModalBody = [];
 
     function createPDFExport() {
     
@@ -80,23 +79,6 @@ function Notes(props) {
  
     function processNewNote(e) {
         let dateUpdated = Date.now();
-        // console.log("Book Data: ", props.bookData);
-        // console.log("Inside process new note function.");
-        // console.log(e);
-        // console.log("Location of Note: ", e.target.form[0].value);
-        // console.log("Title of Note: ", e.target.form[1].value);
-        // console.log("Body of Note: ", e.target.form[2].value);
-        // console.log("bookID: ", props.bookData[0].gut_id);
-        // console.log("bookTitle: ", props.bookData[0].title);
-        // console.log("bookAuthor: ", `${props.bookData[0].authors[0].last_name}, ${props.bookData[0].authors[0].first_name} (${props.bookData[0].authors[0].dob}-${props.bookData[0].authors[0].first_dod}`);
-        // console.log("updated: ", dateUpdated);
-        // console.log("location: ", e.target.form[0].value);
-        // console.log("noteTitle: ", e.target.form[1].value);
-        // console.log("noteBody: ", e.target.form[2].value);
-        // console.log("visible: ", true);
-
-        
-
         let updatedBookNotes = [
         ...bookNotes, {
             bookID: props.bookData[0].gut_id,
@@ -131,16 +113,10 @@ function Notes(props) {
         <li key={note.updated} id={note.updated} onClick={() => {
         }}>
             <a href="#" className="dropdown-item" data-my-variable={note.updated} onClick={(e)=>toggleExistingNoteModal(e)}>{note.noteTitle}</a>
-            {/* <a href="#" className="dropdown-item" data-my-variabe={note.updated} data-bs-toggle="popover" data-bs-title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">{note.noteTitle.}</a> */}
         </li>
     )
 
-    console.log("CurrentBookNotes Array: ", currentBookNotes);
-    console.log("CurrentBookNotesList = ", currentBookNotesList);
-
     function toggleExistingNoteModal(e) {
-        //console.log(e.target.dataset.myVariable);
-        console.log("Entered toggleExistingNoteModal");
         for (let i = 0; i<currentBookNotes.length; i++) {
             if (currentBookNotes[i].updated == e.target.dataset.myVariable) {
                 existingNoteArray.push(currentBookNotes[i])
@@ -341,14 +317,14 @@ function Notes(props) {
                             <label for="noteBodyInput">Body of Note</label>
                         </div>        
                         <hr></hr>
-                        <button className="btn btn-lg w-100 btn-info" type="submit" onClick={(e)=> {
+                        <button className="btn btn-lg w-100 vp-button" type="submit" onClick={(e)=> {
                             e.preventDefault(e)
                             processNewNote(e)
                             }}
                             >Create Note</button>
                     </form>
                     
-                    <h2 className="close-modal" onClick={()=> {
+                    <h2 className="close-modal vp-svg" onClick={()=> {
                         toggleNewNoteModal()
                     }}>
                         <XCircleFill></XCircleFill>
@@ -399,13 +375,13 @@ function Notes(props) {
                                     </tr>
                                 </tbody>
                             </table>
-                            <button className="btn btn-lg btn-info" onClick={()=>deleteNote()}>Delete This Note</button>
+                            <button className="btn btn-lg vp-button" onClick={()=>deleteNote()}>Delete This Note</button>
 
-                            <button className="btn btn-lg btn-info"><CSVLink data={csvData}>Download This Note (CSV)</CSVLink></button>
+                            {/* <button className="btn btn-lg vp-button"><CSVLink data={csvData}>Download This Note (CSV)</CSVLink></button> */}
                         </div>
                     </div>
                     
-                    <h2 className="close-modal" onClick={()=> {
+                    <h2 className="close-modal vp-svg" onClick={()=> {
                         setExistingNote(!existingNote);
                     }}>
                         <XCircleFill></XCircleFill>
@@ -413,16 +389,6 @@ function Notes(props) {
                 </div>
                 </div>
             }
-
-
-{/* bookID: 0,
-            bookTitle: "",
-            bookAuthor: "",
-            updated: 0,
-            location: "",
-            noteTitle: "",
-            noteBody: "",
-            visible: false, */}
 
         </>
     )
