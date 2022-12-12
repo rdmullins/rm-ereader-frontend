@@ -1,4 +1,6 @@
 import axios from "axios";
+import { useState } from "react";
+import { useEffect } from "react";
 
 function Search(props) {
 
@@ -9,38 +11,41 @@ function Search(props) {
     //     console.log(e);
     // }
 
+
     let endpoint = "";
 
     function handleFormSubmit(e) {
+
         // console.log("Form submitted.");
         // console.log("Search Term: ", props.searchTerm);
         // console.log("Type of Search:");
         if (e.target[2].checked) {
             //console.log("Title");
             props.setSearchType("Title");
-            endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us77.gitpod.io/books/booksearch/?search=${props.searchTerm}`
+            endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us78.gitpod.io/books/booksearch/?search=${props.searchTerm}`
             props.setSearchEndpoint(endpoint);
 
         }
         if (e.target[3].checked) {
             //console.log("Author");
             props.setSearchType("Author");
-            endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us77.gitpod.io/books/authorsearch/?search=${props.searchTerm}`
+            endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us78.gitpod.io/books/authorsearch/?search=${props.searchTerm}`
             props.setSearchEndpoint(endpoint);
         }
         if (e.target[4].checked) {
             //console.log("Subject");
             props.setSearchType("Subject");
-            endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us77.gitpod.io/books/subjectsearch/?search=${props.searchTerm}`
+            endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us78.gitpod.io/books/subjectsearch/?search=${props.searchTerm}`
             props.setSearchEndpoint(endpoint);
         }
+
         //props.setSearchTerm("");
         props.setView("search");
 
     }
 
     return (
-        <div className="container border p-1">
+        <div className="container p-1 pt-4 vp-background vp-body-text">
             <form onSubmit={(e) => {
                 e.preventDefault();
                 handleFormSubmit(e, props.searchTerm)
@@ -59,7 +64,7 @@ function Search(props) {
                         aria-describedby="searchButton">
                     </input>
                     <button 
-                        className="btn btn-outline-secondary" 
+                        className="btn vp-button" 
                         type="submit" 
                         id="searchButton">
                             Search
@@ -67,10 +72,10 @@ function Search(props) {
                 </div>
                 <div className="col-1"></div>
             </div>
-            <div className="row text-center">
+            <div className="row text-center pt-1">
                 <div className="col">
                 <ul className="list-group list-group-horizontal">
-                    <li className="col-4 list-group-item border-0">
+                    <li className="col-4 list-group-item border-0 bg-transparent">
                         <input 
                             className="form-check-input me-1" 
                             type="radio" 
@@ -85,7 +90,7 @@ function Search(props) {
                                 Title
                         </label>
                     </li>
-                    <li className="col-4 list-group-item border-0">
+                    <li className="col-4 list-group-item border-0 bg-transparent">
                         <input 
                             className="form-check-input me-1" 
                             type="radio" 
@@ -99,7 +104,7 @@ function Search(props) {
                                 Author
                         </label>
                     </li>
-                    <li className="col-4 list-group-item border-0">
+                    <li className="col-4 list-group-item border-0 bg-transparent">
                         <input 
                             className="form-check-input me-1" 
                             type="radio" 

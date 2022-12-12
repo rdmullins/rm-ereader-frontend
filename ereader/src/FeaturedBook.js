@@ -1,124 +1,165 @@
 import { useState } from "react";
-import { XCircleFill } from "react-bootstrap-icons";
+import { XCircleFill, Book } from "react-bootstrap-icons";
 
 function FeaturedBook(props) {
 
-    // let featuredBookCard = props.featuredBookData[0].map(book =>
-
-    //     )
-
-    // const {featuredBookData = {}} = props;
-
-    // const {
-    //     id: 0;
-    //     author: {
-    //         id: 0;
-    //         first_name: "";
-    //         last_name: "";
-    //         dob: "";
-    //         dod: "";
-    //     };
-    //     book: {
-    //         id: 0;
-    //         gut_type: {
-    //             id: 0;
-    //             type: "";
-    //         };
-    //         gut_id: 0;
-    //         title: "";
-    //         lib_id: 0;
-    //         gut_issued: 2022/01/01;
-    //         description: "";
-    //     };
-    //     author_role: {
-    //         id: 0;
-    //         role: "";
-    //     };
-    // } = featuredBookData;
-    // if(props.featuredBookData){
-    //     if(props.featuredBookData?.book){
-    //         console.log(props.featuredBookData?.book[0].title);
-    //         console.log(props.featuredBookData?.book[0].description);
-    //         console.log(props.featuredBookData?.book[0].gut_id);
-    //     }
-    //     if (props.featuredBookData?.author){
-    //         console.log(props.featuredBookData?.author[0].last_name);
-    //         console.log(props.featuredBookData?.author[0].first_name);
-    //         console.log(props.featuredBookData?.author[0].dob);
-    //         console.log(props.featuredBookData?.author[0].dod);
-    //     }
-    // }
-
     const [featuredBookInfo, setFeaturedBookInfo] = useState(false);
 
+    let onReadingList = false;
+    
+
+    for (let i=0; i<props.readingList.length; i++) {
+        if (props.readingList[i].bookID === props.featuredBookData?.[0].gut_id) {
+            onReadingList = true; 
+        } else {
+            onReadingList = false;
+        }
+    }
 
     function toggleFeaturedBookInfo() {
         setFeaturedBookInfo(!featuredBookInfo);
     }
 
-    if(props.featuredBookData){
-        if(props.featuredBookData?.book){
+    if(props.featuredBookData?.[0].title){
+        if(props.featuredBookData){
+
             return ( 
                 <>
-                    <div className="container">
+                    <div className="container vp-background pt-2">
                         <div className="row text-center">
-                            <div className="col">
-                                <h2>Featured Book</h2>
+                            <div className="col-md-1"></div>
+                            <div className="col col-md-10">
+                                <h1 className="vp-featured-text">Featured Book</h1>
                             </div>
+                            <div className="col-md-1"></div>
                         </div>
                     </div>
                     <div className="container vh-25">
-                        <div className="row">                  
+                        <div className="row">    
+                            <div className="col-md-1"></div>              
                             {/* <div className="card mb-3 col-12 col-md-8"> */}
-                            <div className="card mb-3 col-12">
+                            <div className="card mb-3 col col-md-10 vp-card">
                                 <div className="row">
                                     <div className="card-body">
                                         <div className="row">
-                                            <div className="col-3">
-                                                <img src={`https://www.gutenberg.org/cache/epub/${props.featuredBookData?.book[0].gut_id}/pg${props.featuredBookData?.book[0].gut_id}.cover.medium.jpg`} className="img-fluid border" alt="Book Cover"></img>
+                                            <div className="col col-lg-3">
+                                                <img src={props.featuredBookData?.[0].cover_url} alt="Book Cover"></img>
                                             </div>
-                                            <div className="col-6">
-                                                <h4><em>{props.featuredBookData?.book[0].title}</em></h4>
+                                            <div className="col col-lg-6">
+                                                <h4><em>{props.featuredBookData?.[0].title}</em></h4>
                                                 <p>
                                                     <strong>
-                                                        {props.featuredBookData?.author[0].first_name} &nbsp;
-                                                        {props.featuredBookData?.author[0].last_name} &nbsp;
+                                                        {props.featuredBookData?.[0].authors[0].first_name} &nbsp;
+                                                        {props.featuredBookData?.[0].authors[0].last_name} &nbsp;
                                                     </strong>
                                                         {/* , {props.featuredBookData?.author_role[0].role} */}
                                                     (
-                                                        {props.featuredBookData?.author[0].dob}
+                                                        {props.featuredBookData?.[0].authors[0].dob}
                                                         -
-                                                        {props.featuredBookData?.author[0].dod}
+                                                        {props.featuredBookData?.[0].authors[0].dod}
                                                     )                                                       
                                                 </p>
+
+                                                {(onReadingList) && 
+                                                    <>
+                                                        <hr/>
+                                                        <div className="vp-body-text">
+                                                            <Book /> 
+                                                            <span> On your reading list! </span>
+                                                            <Book />
+                                                        </div>
+                                                        <button className="btn m-1 vp-button"
+                                                            id="removeReadingListToastBtn"
+                                                            onClick={() => {
+                                                                let tempReadingList = [...props.readingList];
+
+                                                                for (let i=0; i<tempReadingList.length; i++) {
+                                                                    if (tempReadingList[i].bookID === props.featuredBookData?.[0].gut_id) {
+                                                                        tempReadingList[i].isActive = false; 
+                                                                    }
+                                                                };
+                                                                props.setReadingList(tempReadingList);
+                                                                localStorage.setItem("readingList", JSON.stringify(tempReadingList));  
+                                                            }}
+                                                        >Remove From Reading List</button>
+                                                    </>
+                                                }
+
+                                                {(!onReadingList) && 
+                                                    <>
+                                                        <hr/>
+                                            
+                                                        <button className="btn m-1 vp-button"
+                                                            onClick={() => {
+                                                                let tempReadingList = [
+                                                                    ...props.readingList, {
+                                                                      bookID: props.featuredBookData?.[0].gut_id,
+                                                                      title: props.featuredBookData?.[0].title,
+                                                                      author: `${props.featuredBookData?.[0].authors[0].first_name} ${props.featuredBookData?.[0].authors[0].last_name}`,
+                                                                      isActive: true,
+                                                                      updated: Date.now(),
+                                                                    }
+                                                                  ];
+                                                                props.setReadingList(tempReadingList);
+                                                                localStorage.setItem("readingList", JSON.stringify(tempReadingList));  
+                                                            }}
+                                                        >Add To Reading List</button>
+                                                    </>
+                                                }
+
                                             </div>
-                                            <div className="col-3">
-                                                <button type="button" className="btn w-100 m-1 btn-info" onClick={() => props.setView("EPub")}>Read Now</button>
-                                                <button type="button" className="btn w-100 m-1 btn-info">Listen Now</button>
-                                                <button type="button" className="btn w-100 m-1 btn-info" onClick={() => toggleFeaturedBookInfo()}>Info</button>
+                                            <div className="col col-lg-3">
+                                                <button type="button" className="btn w-100 m-1 vp-button" 
+                                                    onClick={() => {
+                                                        props.setEtextId(props.featuredBookData?.[0].gut_id);
+                                                        props.setBookData([]);
+                                                        props.setBookData(props.featuredBookData);
+                                                        props.setView("EPub2")}}
+                                                >
+                                                    Read Now
+                                                </button>
+                                                <button type="button" className="btn w-100 m-1 vp-button"
+                                                    onClick={() => {
+                                                        props.setAudioBookId(props.featuredBookData?.[0].gut_id);
+                                                        props.setBookData([]);
+                                                        props.setBookData(props.featuredBookData)
+                                                        props.setView("audio");
+                                                    }}
+                                                >Listen Now</button>
+                                                <button type="button" className="btn w-100 m-1 vp-button" onClick={() => toggleFeaturedBookInfo()}>Info</button>
                                             </div>
+                                            <div className="col-md-1"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            {/* <div className="col-12 col-md-4 p-2 overflow-auto">
-                                <h3>{props.featuredBookData?.book[0].title}</h3> 
-                                <p>{props.featuredBookData?.book[0].description}</p>
-                            </div> */}
                         </div>
                     </div>
 
                     {featuredBookInfo && (
-                        <div className="modal">
+                        <div className="modal vp-background">
                         <div onClick={toggleFeaturedBookInfo} className="overlay"></div>
-                        <div className="modal-content">
-                            <h2>{props.featuredBookData?.book[0].title}</h2>
-                            <div dangerouslySetInnerHTML={{__html: props.featuredBookData?.book[0].description}}></div>
+                        <div className="modal-content vp-background">
+                            <h2 className="vp-featured-text">{props.featuredBookData?.[0].title}</h2>
+                            <div className="vp-body-text" dangerouslySetInnerHTML={{__html: props.featuredBookData?.[0].description}}></div>
                             <p>
-                                <button type="button" className="btn w-100 m-1 btn-info">Read Now</button>
-                                <button type="button" className="btn w-100 m-1 btn-info">Listen Now</button>
+                            <button type="button" className="btn w-100 m-1 vp-button" 
+                                onClick={() => {
+                                    props.setEtextId(props.featuredBookData?.[0].gut_id);
+                                    props.setBookData([]);
+                                    props.setBookData(props.featuredBookData);
+                                    props.setView("EPub2")}}
+                            >
+                                Read Now
+                            </button>
+                            <button type="button" className="btn w-100 m-1 vp-button"
+                                onClick={() => {
+                                    props.setAudioBookId(props.featuredBookData?.[0].gut_id);
+                                    props.setView("audio");
+                                }}
+                            >Listen Now</button>
                             </p>
-                            <h2 className="close-modal" onClick={toggleFeaturedBookInfo}>
+                            <h2 className="close-modal vp-svg" onClick={toggleFeaturedBookInfo}>
                                 <XCircleFill></XCircleFill>
                             </h2>
                         </div>

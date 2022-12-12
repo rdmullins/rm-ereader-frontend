@@ -50,11 +50,11 @@ function Footer(props) {
 
     return (
         <>
-            <div className="container sticky-bottom">
+            <div className="container sticky-bottom vp-background">
                 <div className="row text-center">
-                    <div className="col-4 clickable"><h3><HouseFill onClick={() => props.setView("home")}></HouseFill></h3></div>
-                    <div className="col-4 clickable"><h3><List onClick={toggleMenu}></List></h3></div>
-                    <div className="col-4 clickable"><h3><BookFill onClick={() => props.setView("myBooks")}></BookFill></h3></div>
+                    <div className="col-4 clickable"><h3 className="vp-svg"><HouseFill onClick={() => props.setView("home")}></HouseFill></h3></div>
+                    <div className="col-4 clickable"><h3 className="vp-svg"><List onClick={toggleMenu}></List></h3></div>
+                    <div className="col-4 clickable"><h3 className="vp-svg"><BookFill onClick={() => props.setView("myBooks")}></BookFill></h3></div>
                 </div>
             </div>
 
@@ -62,16 +62,16 @@ function Footer(props) {
             <div className="modal">
             <div onClick={toggleMenu} className="overlay"></div>
             <div className="modal-content">
-                <h2>Menu</h2>
-                <p>
+                <h2 className="vp-featured-text">Menu</h2>
+                <p className="vp-body-text">
                 <ul>
                     <li>Menu Item Goes Here</li>
                     <li>And Another One Here</li>
                     <li>And Here</li>
-                    <li><button onClick={() => toggleDarkMode()}>Light/Dark Mode</button></li>
+                    <li><button className="vp-button" onClick={() => toggleDarkMode()}>Light/Dark Mode</button></li>
                 </ul>
                 </p>
-                <h2 className="close-modal" onClick={toggleMenu}>
+                <h2 className="close-modal vp-svg" onClick={toggleMenu}>
                     <XCircleFill></XCircleFill>
                 </h2>
             </div>

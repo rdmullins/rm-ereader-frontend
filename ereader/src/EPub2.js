@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 //import "./styles.css";
 import { ReactReader, ReactReaderStyle } from "react-reader";
+import { getStorage, ref, getBlob, getDownloadURL } from "firebase/storage";
 //import Ebook from "./epub/sample.epub";
 
 const ownStyles = {
@@ -14,24 +15,24 @@ const ownStyles = {
 //const loc = "epubcfi(/6/4[chapter1]!/4/2[chapter1]/8[s3]/6/1:490)";
 const loc = null;
 
-export default function EPub2() {
+export default function EPub2(props) {
+
+  
+  //const [ePubURL, setEPubURL] = useState("https://gerhardsletten.github.io/react-reader/files/alice.epub");
+  // const [ePubURL, setEPubURL] = useState("https://firebasestorage.googleapis.com/v0/b/rm-ereader.appspot.com/o/pg76.epub");
+  const [ePubURL, setEPubURL] = useState(null)
+
+  const storage = getStorage();
+  const ePubRef = ref(storage, `gs://rm-ereader.appspot.com/pg${props.etextId}-images-3.epub`);
   const [selections, setSelections] = useState([]);
   const renditionRef = useRef(null);
 
-  const [location, setLocation] = useState(loc);
+ const [location, setLocation] = useState(loc);
   const locationChanged = (epubcifi) => {
     // epubcifi is a internal string used by epubjs to point to a location in an epub. It looks like this: epubcfi(/6/6[titlepage]!/4/2/12[pgepubid00003]/3:0)
     setLocation(epubcifi);
     console.log(location);
   };
-
-  // setSelections([
-  //   {
-  //     text:
-  //       "In previous generations, people often believed that business transactions were immo",
-  //     cfiRange: "epubcfi(/6/4[chapter1]!/4/2[chapter1]/4[s1]/6,/1:0,/1:83)"
-  //   }
-  // ]);
 
   useEffect(() => {
     if (renditionRef.current) {
@@ -60,14 +61,31 @@ export default function EPub2() {
         renditionRef.current.off("selected", setRenderSelection);
       };
     }
-  }, [setSelections, selections]);
+  }, [selections]);
+
+  useEffect(() => {
+    console.log("running tmp to get file")
+    async function getData() {
+      const tmp = await getDownloadURL(ePubRef)
+      setEPubURL(tmp);
+
+    }
+    getData();
+
+  }, []);
+
+  if (!ePubURL) return null
+  
   return (
     <>
       <div className="container" style={{ position: "relative", height: "100vh" }}>
         <ReactReader
           location={location}
           locationChanged={locationChanged}
-          url={"https://gerhardsletten.github.io/react-reader/files/alice.epub"}
+          // url={"https://gerhardsletten.github.io/react-reader/files/alice.epub"}
+          //url = {"https://drive.google.com/uc?id=1bR-kxc_m4boe69fYKVGtLPhiD-ElAiG4/view?usp=sharing"}
+
+          url={ePubURL}
           styles={ownStyles}
           getRendition={(rendition) => {
             renditionRef.current = rendition;
@@ -77,6 +95,9 @@ export default function EPub2() {
               }
             });
             setSelections([]);
+          }}
+          epubInitOptions={{
+            openAs: 'epub'
           }}
         />
       </div>
@@ -91,7 +112,7 @@ export default function EPub2() {
       >
         Selection:
         <ul>
-          {selections.map(({ text, cfiRange }, i) => (
+           {selections.map(({ text, cfiRange }, i) => (
             <li key={i}>
               {text}{" "}
               <button

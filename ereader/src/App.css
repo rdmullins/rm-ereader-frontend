@@ -1,3 +1,145 @@
+/*
+
+VoxPublica - Branding Info
+
+Palette - 'Pumpkin Patch' from Canva
+
+    Image: #3F170E #C08C46 #D56A34
+    Text Primary: #3F170E
+    Text Secondary: #D56A34
+    Background: #F9F7E9
+
+Fonts:
+    Tenor Sans (Logo)
+    Poppins Light (Body)
+
+Google Fonts API
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&family=Tenor+Sans&display=swap');
+</style>
+
+font-family: 'Poppins', sans-serif;
+font-family: 'Tenor Sans', sans-serif;
+
+*/
+
+/* body {    /* The image used */
+    /* background-image: url("./pexels-stanislav-kondratiev-2908984.jpg");
+
+    /* Full height */
+    /* height: 100%; 
+
+    /* Center and scale the image nicely */
+    /* background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+} */ 
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&family=Tenor+Sans&display=swap');
+
+/* Branding Color Declarations */
+
+:root {
+    /* --vp-background:    #F9F7E9; */
+    --vp-background: #EDE2CF;
+    --vp-text-primary:  #3F170E;
+    --vp-text-secondary: #D56A34;
+    /*--vp-button:        #D56A34;*/
+    --vp-button:        #004AAD;
+    --vp-accent:        #C08C46;
+}
+
+.vp-body {
+    height: 100%;
+}
+
+a:link {
+    color: var(--vp-text-secondary);
+}
+
+a:visited {
+    color: var(--vp-text-primary);
+}
+
+a:hover {
+    color: var(--vp-button);
+}
+
+a:active {
+    color: var(--vp-accent);
+}
+
+.vp-book-cover {
+    width: auto;
+    height: 200px;
+    border: 1pt solid var(--vp-button);
+    opacity: 0.7;
+}
+
+.vp-flex-fill {
+    flex: 1;
+}
+
+.vp-book-cover:hover {
+    opacity: 1;
+}
+
+.vp-page-background {
+    background-color: var(--vp-background);
+}
+
+.vp-button {
+    background-color: var(--vp-button);
+    /* color: var(--vp-background); */
+    color: white;
+    font-weight: bold;
+    font-family: "Poppins", sans-serif;
+}
+
+.vp-button:hover {
+    border: 1pt solid var(--vp-button);
+}
+
+.vp-svg {
+    color: var(--vp-button);
+}
+
+.vp-body-text {
+    color: var(--vp-text-primary);
+    font-family: "Poppins", sans-serif;
+}
+
+.vp-featured-text {
+    color: var(--vp-text-primary);
+    font-family: "Tenor Sans", sans-serif;
+    text-transform: uppercase;
+}
+
+.vp-card {
+    background-color: var(--vp-background);
+    color: var(--vp-text-primary);
+    font-family: "Poppins", sans-serif;
+    border: 1pt solid var(--vp-button);
+}
+
+.vp-logo {
+    width: 25vw;
+    height: auto;
+    max-width: 40vw;
+}
+
+.plain-link {
+    text-decoration: none;
+}
+
+.list-group {
+    flex-direction: row;
+}
+
+.collection-card {
+    width: 100px;
+}
+
 .collection-container {
     /* display: block; */
     height: 20vh;
@@ -9,8 +151,8 @@
 
 .collection-cover {
     display: inline-block;
-    height: 12vh;
-    width: 8vh;
+    height: auto;
+    width: 8vw;
 }
 
 .clickable {
