@@ -22,20 +22,20 @@ function Search(props) {
         if (e.target[2].checked) {
             //console.log("Title");
             props.setSearchType("Title");
-            endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us78.gitpod.io/books/booksearch/?search=${props.searchTerm}`
+            endpoint = `https://rm-ereader.uc.r.appspot.com/books/booksearch/?search=${props.searchTerm}`
             props.setSearchEndpoint(endpoint);
 
         }
         if (e.target[3].checked) {
             //console.log("Author");
             props.setSearchType("Author");
-            endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us78.gitpod.io/books/authorsearch/?search=${props.searchTerm}`
+            endpoint = `https://rm-ereader.uc.r.appspot.com/books/authorsearch/?search=${props.searchTerm}`
             props.setSearchEndpoint(endpoint);
         }
         if (e.target[4].checked) {
             //console.log("Subject");
             props.setSearchType("Subject");
-            endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us78.gitpod.io/books/subjectsearch/?search=${props.searchTerm}`
+            endpoint = `https://rm-ereader.uc.r.appspot.com/books/subjectsearch/?search=${props.searchTerm}`
             props.setSearchEndpoint(endpoint);
         }
 

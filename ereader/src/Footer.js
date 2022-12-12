@@ -50,13 +50,15 @@ function Footer(props) {
 
     return (
         <>
-            <div className="container sticky-bottom vp-background">
-                <div className="row text-center">
+        <div className="vp-page-background">
+            <div className="container fixed-bottom vp-page-background">
+                <div className="row text-center fixed-bottom vp-page-background">
                     <div className="col-4 clickable"><h3 className="vp-svg"><HouseFill onClick={() => props.setView("home")}></HouseFill></h3></div>
                     <div className="col-4 clickable"><h3 className="vp-svg"><List onClick={toggleMenu}></List></h3></div>
                     <div className="col-4 clickable"><h3 className="vp-svg"><BookFill onClick={() => props.setView("myBooks")}></BookFill></h3></div>
                 </div>
             </div>
+        </div>
 
             {menu && (
             <div className="modal">
@@ -65,10 +67,9 @@ function Footer(props) {
                 <h2 className="vp-featured-text">Menu</h2>
                 <p className="vp-body-text">
                 <ul>
-                    <li>Menu Item Goes Here</li>
-                    <li>And Another One Here</li>
-                    <li>And Here</li>
-                    <li><button className="vp-button" onClick={() => toggleDarkMode()}>Light/Dark Mode</button></li>
+                    <li><a href="#" onClick={()=>props.setView("myBooks")}>View Your Reading List</a></li>
+                    {/* <li><a href="#" onClick={()=>props.setView("EPub2")}>View Your Notes</a></li> */}
+                    {/* <li><button className="vp-button" onClick={() => toggleDarkMode()}>Light/Dark Mode</button></li> */}
                 </ul>
                 </p>
                 <h2 className="close-modal vp-svg" onClick={toggleMenu}>

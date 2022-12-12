@@ -148,9 +148,20 @@ function Header(props) {
             <div className="modal">
             <div onClick={toggleAbout} className="overlay"></div>
             <div className="modal-content vp-background">
-                <h2 className="vp-featured-text">About</h2>
+                <h2 className="vp-featured-text">About VoxPublica</h2>
                     <p className="vp-body-text">
-                        Lorem ipsum etc.
+                        <strong className="vp-featured-text">VOXPUBLICA</strong> gives users the freedom to enjoy publid domain
+                        audiobooks and eBooks in a sleek, distraction-free app.
+                    </p>
+                    <p className="vp-body-text">
+                        No user data is collected on the server side; all of your local data (such
+                        as your Reading List and Notes) are stored locally within your web
+                        browser of choice.
+                    </p>
+                    <p className="vp-body-text">
+                        New titles are added regularly. If there is a particular title you would
+                        like to see included in our database, please use the Contact menu and
+                        let us know!
                     </p>
                 <h2 className="close-modal vp-svg" onClick={toggleAbout}>
                 <XCircleFill></XCircleFill>

@@ -113,7 +113,7 @@ function App() {
     // console.log("ReadingList = ", readingList);
 
     useEffect(() => {
-      let endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us78.gitpod.io/books/bookbyid/?search=${bookId}`
+      let endpoint = `https://rm-ereader.uc.r.appspot.com/books/bookbyid/?search=${bookId}`
       axios.get(endpoint)
       .then((response)=> setFeaturedBookData(response.data))
     },[]);
@@ -140,7 +140,7 @@ function App() {
         axios.get(endpoint)
           .then((response)=> setBookData(response.data))
           // .then(console.log("Search Endpoint change detected."))
-          .then(setSearchResultEndpoint(`https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us78.gitpod.io/books/author_book/${bookData.bookId}/`))
+          .then(setSearchResultEndpoint(`https://rm-ereader.uc.r.appspot.com/books/author_book/${bookData.bookId}/`))
       }
 //    },[]);
     },[searchEndpoint]);
@@ -153,7 +153,7 @@ function App() {
         axios.get(endpoint)
           .then((response)=> setBookData(response.data))
           // .then(console.log("Search Endpoint change detected."))
-          //.then(setMyBookSearch(`https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us78.gitpod.io/books/bookbyid/?search=${bookData.bookId}/`))
+          //.then(setMyBookSearch(`https://rm-ereader.uc.r.appspot.com/books/bookbyid/?search=${bookData.bookId}/`))
         
       }
       // console.log("Bookdata inside the myBookSearch useEffect is ", bookData);
@@ -161,7 +161,7 @@ function App() {
     },[myBookSearch]);
 
     useEffect(() => {
-        let endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us78.gitpod.io/books/collections/`
+        let endpoint = `https://rm-ereader.uc.r.appspot.com/books/collections/`
         axios.get(endpoint)
         .then((response)=> {
           setCollectionsList(response.data)
@@ -171,7 +171,7 @@ function App() {
     },[]);
     
     useEffect(() => {
-      let endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us78.gitpod.io/books/collectionsearch/?search=${collectionFilter}`
+      let endpoint = `https://rm-ereader.uc.r.appspot.com/books/collectionsearch/?search=${collectionFilter}`
       // console.log("Collection search filter is ", collectionFilter);
       axios.get(endpoint)
       .then((response)=> {
