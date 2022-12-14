@@ -96,6 +96,11 @@ a:active {
     opacity: 0.7;
 }
 
+.dropdown-menu {
+    max-height: 20vh;
+    overflow-y: scroll;
+}
+
 .vp-flex-fill {
     flex: 1;
 }
