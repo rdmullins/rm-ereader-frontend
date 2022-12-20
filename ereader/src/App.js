@@ -24,6 +24,7 @@ import EPub2 from "./EPub2";
 import TestRSS from "./TestRSS";
 import Audio from "./Audio";
 import Notes from "./Notes";
+import Jeff from "./Jeff";
 import Cover from "./Cover";
 import "./App.css";
 
@@ -318,6 +319,21 @@ function App() {
                 readingList = {readingList}
                 setReadingList = {setReadingList}
                 setBookData = {setBookData} />
+              <Footer 
+                setView = {setView}
+                darkMode = {darkMode}
+                setDarkMode = {setDarkMode}
+                readingList = {readingList}
+                setReadingList = {setReadingList}/>
+            </>
+            }
+
+            {(view === "Jeff") &&
+            <>
+              <Header 
+                setView = {setView}
+                darkMode = {darkMode} />
+              <Jeff />
               <Footer 
                 setView = {setView}
                 darkMode = {darkMode}
