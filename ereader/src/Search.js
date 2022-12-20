@@ -19,23 +19,24 @@ function Search(props) {
         // console.log("Form submitted.");
         // console.log("Search Term: ", props.searchTerm);
         // console.log("Type of Search:");
+
         if (e.target[2].checked) {
             //console.log("Title");
             props.setSearchType("Title");
-            endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us78.gitpod.io/books/booksearch/?search=${props.searchTerm}`
+            endpoint = `https://rm-ereader.uc.r.appspot.com/books/booksearch/?search=${props.searchTerm}`
             props.setSearchEndpoint(endpoint);
 
         }
         if (e.target[3].checked) {
             //console.log("Author");
             props.setSearchType("Author");
-            endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us78.gitpod.io/books/authorsearch/?search=${props.searchTerm}`
+            endpoint = `https://rm-ereader.uc.r.appspot.com/books/authorsearch/?search=${props.searchTerm}`
             props.setSearchEndpoint(endpoint);
         }
         if (e.target[4].checked) {
             //console.log("Subject");
             props.setSearchType("Subject");
-            endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us78.gitpod.io/books/subjectsearch/?search=${props.searchTerm}`
+            endpoint = `https://rm-ereader.uc.r.appspot.com/books/subjectsearch/?search=${props.searchTerm}`
             props.setSearchEndpoint(endpoint);
         }
 
@@ -47,9 +48,12 @@ function Search(props) {
     return (
         <div className="container p-1 pt-4 vp-background vp-body-text">
             <form onSubmit={(e) => {
+                if ((props.searchTerm == "Jeff") && (e.target[4].checked)) {
+                   props.setView("Jeff");
+                } else {
                 e.preventDefault();
                 handleFormSubmit(e, props.searchTerm)
-            }}>
+            }}}>
             <div className="row">
                 <div className="col-1"></div>
                 <div className="col-10 input-group mb-3">
@@ -57,7 +61,7 @@ function Search(props) {
                         type="text" 
                         onInput={(event) => 
                             props.setSearchTerm(event.target.value)} 
-                        value={props.searchTerm} 
+                          value={props.searchTerm} 
                         className="form-control" 
                         placeholder="Search..." 
                         aria-label="Search Box" 

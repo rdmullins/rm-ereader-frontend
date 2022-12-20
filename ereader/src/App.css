@@ -49,6 +49,26 @@ font-family: 'Tenor Sans', sans-serif;
     --vp-accent:        #C08C46;
 }
 
+html, body {
+    height: 100% !important;
+    width: 100% !important;
+    background-color: #EDE2CF !important;
+    background-repeat: repeat !important;
+    background-size: cover !important;
+}
+
+.bg-light {
+    background-color: #EDE2CF !important;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--vp-background);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--vp-button);
+}
+
 .vp-body {
     height: 100%;
 }
@@ -74,6 +94,11 @@ a:active {
     height: 200px;
     border: 1pt solid var(--vp-button);
     opacity: 0.7;
+}
+
+.dropdown-menu {
+    max-height: 20vh;
+    overflow-y: scroll;
 }
 
 .vp-flex-fill {
@@ -165,7 +190,7 @@ body.active-modal {
     overflow-y: hidden;
 }
 
-.dark-mode-modal {
+/* .dark-mode-modal {
     position: absolute;
     top: 40%;
     left: 50%;
@@ -176,7 +201,7 @@ body.active-modal {
     border-radius: 3px;
     max-width: 600px;
     min-width: 300px;
-}
+} */
 
 .btn-modal {
     padding: 10px 20px;

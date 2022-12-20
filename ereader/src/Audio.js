@@ -62,7 +62,7 @@ function Audio(props) {
       //console.log("In audio component. BookData is ", props.bookData);
 
     useEffect(() => {
-      let endpoint = `https://8000-rdmullins-rmereaderback-gvtdimo6rdt.ws-us78.gitpod.io/books/audiobook_api/?search=${props.audioBookId}`
+      let endpoint = `https://rm-ereader.uc.r.appspot.com/books/audiobook_api/?search=${props.audioBookId}`
       axios.get(endpoint)
       .then((response)=> {
         setAudioBookRecord(response.data)

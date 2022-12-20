@@ -224,17 +224,31 @@ function Notes(props) {
     return (
         <>
             <div className="container">
-            <hr/>
-            <button 
-                type="button" 
-                class="btn vp-button"
-                onClick={() => {
-                    toggleNoteModal();
-                }}
-                >Notes&nbsp;&nbsp; 
-                <span class="badge text-bg-warning">{currentBookNotes.length}</span>
-            </button>
-            <hr/>
+                <div className="row">
+        
+                {/* </div>
+                <div className="row">
+                    <div className="col-5 vp-featured-text">
+                        <h3>{props.bookData[0].title}</h3>
+                    </div>
+                    <div className="col-5 vp-body-text">
+                        <h4>by {props.bookData[0].authors[0].first_name} {props.bookData[0].authors[0].last_name} ({props.bookData[0].authors[0].dob} - {props.bookData[0].authors[0].dod})</h4>
+                    </div>
+                    <div className="col-2"> */}
+                        <button 
+                            type="button" 
+                            class="btn vp-button float-end"
+                            onClick={() => {
+                                toggleNoteModal();
+                            }}
+                            >Notes&nbsp;&nbsp; 
+                            <span class="badge text-bg-warning">{currentBookNotes.length}</span>
+                        </button>
+                    </div>
+                {/* </div>
+                <div className="row">
+                    <hr></hr>
+                </div> */}
             </div>
 
             {(noteModal) &&
