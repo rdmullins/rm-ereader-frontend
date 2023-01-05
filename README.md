@@ -7,3 +7,4 @@ ReadMe coming soon
 12/29/22 -> Changelog - Completed Poe
 12/31/22 -> Code maintenance
  
+1/5/23 -> Smithsonian article
