@@ -9,3 +9,5 @@ ReadMe coming soon
  
 1/5/23 -> Smithsonian article
 1/7/23 -> Updated API method
+
+1/9/23 -> Covetrus onboarding
