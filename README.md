@@ -14,3 +14,4 @@ ReadMe coming soon
 1/16/23 -> Holiday
 1/17/23 -> PI Planning
 1/18/23 -> More PI Planning
+1/23/23 -> Started MS PowerShell training
