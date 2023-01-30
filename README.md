@@ -17,3 +17,4 @@ ReadMe coming soon
 1/23/23 -> Started MS PowerShell training
 1/26/23 -> Closed a ticket
 1/28/23 -> Update to LinkedIn
+1/30/23 -> Standups 2x
